@@ -1,43 +1,78 @@
-header{
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+
+}
+
+header {
     background-color: #a32b2b;
-    color: white; 
+    color: #f5f5f5; 
     position: relative; 
     height: 175px;  
     font-family: inter;
 }
 
-.img-header{
+.img-header {
     margin-top: 50px;
 }
 
-.arriba-header{
-    background-color: black;
+.arriba-header {
+    background-color: #1a1a1a; 
     text-align: center;
-    padding:10px;
+    padding: 10px;
     text-size-adjust: 10px;
+    font-size: 75%;
+    height: 10%;
+
 }
 
-.nav-principal{
+.nav-principal {
+    display: flex;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    gap: 20px;
     position: absolute;
+    text-align: justify;
     top: 50%;
     right: 50%;
+    white-space: nowrap;
 }
 
-.nav-icons{
+.nav-icons {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    text-align: justify;
+    top: 70%;
+    right: 50%;
+    white-space: nowrap;
 }
 
-.button-lenguage{
-    border: 1px solid white;
+.button-lenguage {
+    border: 1px solid #f5f5f5; 
+    width: 10%;
     background-color: transparent;
-    color: white;
-    padding: 5px 10px 5px 10px;
+    color: #f5f5f5; 
+    padding: 5px 10px;
     text-align: right;
-    border-radius: 5px;
+    border-radius: 7px;
     position: absolute;
     right: 50px;
     top: 50px;
     z-index: 100;
+}
+
+#texto-lenguage {
+    font-size: 10px;
+    align-items: ;
+}
+
+#iconos img {
+    height: 25px; 
+    width: 25px;  
 }
