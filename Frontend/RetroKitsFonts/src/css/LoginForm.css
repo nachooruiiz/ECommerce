@@ -1,0 +1,19 @@
+.container{
+    background-color: #EBEBEB;
+}
+
+.button-form{
+    background-color: yellow;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.button-form:hover{
+    background-color: rgb(174, 174, 0);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    transition: 1s;
+}
