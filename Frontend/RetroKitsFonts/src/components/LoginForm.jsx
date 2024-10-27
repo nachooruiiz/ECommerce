@@ -2,18 +2,25 @@ import "../css/LoginForm.css"
 
 export function LoginForm() {
     return (
+      <div className="containerAll">
+        <img  class="imagenLogo" src="public\Imagenes\Logo.png" />
         <div className="container">
-            <img src="" alt="la imagen no se ha podido cargar correctamente"/>
+        <h2>Iniciar Sesion</h2>
             <form>
-                <h2>Usuario *</h2>
-                <input type="text"></input>
-                <h2>Contraseña *</h2>
-                <input type="text"></input>
+                <div className="formInput">  
+                    <h2>Usuario *</h2>
+                    <input className="inputForm" type="text"></input>
+                    <h2>Contraseña *</h2>
+                    <input className="inputForm" type="password"></input>
+                </div>
+                <div className="buttons">
                 <br/>
                 <button className="button-form">INICIAR SESIÓN</button>
                 <hr/>
-                <button>REGISTRARSE</button>
+                <button className="button-form">REGISTRARSE</button>
+                </div>
             </form>
         </div>
+        </div> 
     );
 }
