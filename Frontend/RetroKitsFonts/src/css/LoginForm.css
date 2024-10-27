@@ -24,12 +24,13 @@
     padding-left: 4%;
     padding-right: 4%;
     padding-bottom: 5%;
-
     margin-right: 30%;
-    margin-left: 30%;
+    margin-left: 34%;
     border-radius: 1%;
     background-color: #EBEBEB;
     align-content: center;
+    width: 25%;
+    height: 25%;
 }
 .button-form{
     margin: 5%;
