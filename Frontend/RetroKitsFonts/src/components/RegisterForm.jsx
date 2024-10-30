@@ -17,9 +17,17 @@ export default function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
+        if (!password){
+            setError("La contraseña no puede estar vacia")
+            return
+        }
         if (password !== confirmPassword) {
             setError("Las contraseñas no coinciden");
             return;
+        }
+        if(!address){  
+            setError("La dirección no puede estar vacia")
+            return
         }
 
         try {
