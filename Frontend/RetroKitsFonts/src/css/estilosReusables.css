@@ -1,0 +1,13 @@
+.error{
+    color: red;
+    background-color: rgba(255, 0, 0, 0.393);
+    border: solid 5px rgb(255, 33, 33);
+    border-radius: 10px;
+}
+
+.succes{
+    color: lime;
+    background-color: rgba(0, 255, 0, 0.393);
+    border: solid 5px rgb(71, 255, 71);
+    border-radius: 10px;
+}
