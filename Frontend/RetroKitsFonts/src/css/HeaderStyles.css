@@ -1,78 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-* {
-    font-family: 'Montserrat', sans-serif;
-    padding: 0;
-    margin: 0;
+
+/* Estructura general del header */
+header {
+    background-color: #a32b2b;
+    color: #f5f5f5;
+    font-family: inter;
+    display: flex;
+    flex-direction: column;
+    height: 170px;  /* Limita la altura del header */
+    position: fixed;
+    width: 100%;
+}
+
+/* Div superior para el mensaje de envíos */
+.arriba-header {
+    background-color: #1a1a1a;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.875em;
+    color: #f5f5f5;
+}
+
+/* Contenedor principal dividido en tres partes */
+.contenido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex: 1;
 
 }
 
-header {
-    background-color: #a32b2b;
-    color: #f5f5f5; 
-    position: relative; 
-    height: 175px;  
-    font-family: inter;
+/* Logo a la izquierda */
+.header-logo {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .img-header {
-    margin-top: 50px;
+    width: 140px;
+    height: auto;
 }
 
-.arriba-header {
-    background-color: #1a1a1a; 
-    text-align: center;
-    padding: 10px;
-    text-size-adjust: 10px;
-    font-size: 75%;
-    height: 10%;
-
-}
-
+/* Navegación en el centro */
 .nav-principal {
+    flex: 2;
     display: flex;
     justify-content: center;
-    top: 50%;
-    left: 50%;
-    gap: 20px;
-    position: absolute;
-    text-align: justify;
-    top: 50%;
-    right: 50%;
-    white-space: nowrap;
+    gap: 80px;
+    font-size: 25px;
+    color: #f5f5f5;
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
 }
 
-.nav-icons {
+/* Contenedor para el selector de idioma y los iconos */
+.header-derecha {
+    flex: 1;
     display: flex;
-    justify-content: end;
-    gap: 10px;
-    position: absolute;
-    text-align: justify;
-    top: 70%;
-    right: 50%;
-    white-space: nowrap;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 80%;
+
 }
 
+/* Selector de idioma */
 .button-lenguage {
-    border: 1px solid #f5f5f5; 
-    width: 10%;
+    border: 1px solid #f5f5f5;
     background-color: transparent;
-    color: #f5f5f5; 
+    color: #f5f5f5;
     padding: 5px 10px;
-    text-align: right;
     border-radius: 7px;
-    position: absolute;
-    right: 50px;
-    top: 50px;
-    z-index: 100;
+    font-size: 10px;
+    cursor: pointer;
+    width: 100px;
+    margin-right: 10%;
+    text-align: left;
+    margin-bottom: 5px; /* Espacio entre el selector y los iconos */
 }
 
-#texto-lenguage {
-    font-size: 10px;
-    align-items: ;
+/* Iconos de usuario debajo del selector de idioma */
+.nav-icons-header {
+    display: flex;
+    align-items: flex-end; /* Alinea los elementos en la parte inferior del contenedor */
+    justify-content: flex-end;
+    margin-right: 11%;
+    gap: 20px;
+    font-size: 30px;
+    height: 60%; /* Asegúrate de que tome toda la altura disponible */
 }
+
 
 #iconos img {
-    height: 25px; 
-    width: 25px;  
+    height: 20px;
+    width: 20px;
 }

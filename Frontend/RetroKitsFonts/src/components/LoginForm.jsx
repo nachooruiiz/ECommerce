@@ -1,10 +1,10 @@
-import './../css/LoginForm.css'
-import { Link } from "react-router-dom";
+import './../css/LoginForm.css';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
   return (
     <div className="containerAll">
-      <img className="imagenLogo" src="public\Imagenes\Logo.png" />
+      <img className="imagenLogo" src="public/Imagenes/Logo.png" />
       <div className="container">
         <h2>Iniciar Sesion</h2>
         <form>
@@ -20,7 +20,9 @@ export default function LoginForm() {
               INICIAR SESIÓN
             </button>
             <hr />
-            <Link to="/Register"><button className="button-form">REGISTRARSE</button></Link>
+            <Link to="/Register">
+              <button className="button-form">REGISTRARSE</button>
+            </Link>
           </div>
         </form>
       </div>

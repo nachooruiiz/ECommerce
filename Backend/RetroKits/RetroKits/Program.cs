@@ -1,6 +1,8 @@
 
+using Microsoft.IdentityModel.Tokens;
 using RetroKits.Database;
 using RetroKits.Repository;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace RetroKits;
@@ -18,12 +20,43 @@ public class Program
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+        // Permite CORS
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+        }
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
         // Así añadimos los servicios creados
         builder.Services.AddScoped<MyDbContext>();
         builder.Services.AddScoped<UserRepository>();
+
+        builder.Services.AddAuthentication()
+         .AddJwtBearer(options =>
+         {
+             string key = "nduncsdicunseu37846%$·(·/&(T/ñgb87";
+
+
+             options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+
+             {
+                 ValidateIssuer = false,
+                 ValidateAudience = false,
+                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+             };
+
+         });
 
         var app = builder.Build();
 
@@ -43,6 +76,20 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger(); 
+            app.UseSwaggerUI();
+
+            app.UseCors();
+        }
+
+
+        // Habilita la autenticación
+        app.UseAuthentication();
+        // Habilita la autorización
         app.UseAuthorization();
 
 
