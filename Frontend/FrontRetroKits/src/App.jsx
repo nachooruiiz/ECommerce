@@ -1,5 +1,7 @@
 import "./App.css";
 import "./styles/carrousel.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 import Carrousel from "./components/carrousel.jsx";
