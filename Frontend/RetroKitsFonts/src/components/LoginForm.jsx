@@ -18,7 +18,7 @@ export default function LoginForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      
+      console.log(response)
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem('token', token);
@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   return (
     <div className="containerAll">
-      <img className="imagenLogo" src="public/Imagenes/Logo.png" />
+      <img className="imagenLogo" src="/Imagenes/Logo.png" />
       <div className="container">
         <h2>Iniciar Sesion</h2>
         <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ export default function LoginForm() {
               INICIAR SESIÓN
             </button>
             <hr />
-            <Link to="/Register">
+            <Link to="/register">
               <button className="button-form">REGISTRARSE</button>
             </Link>
           </div>

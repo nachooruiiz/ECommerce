@@ -38,14 +38,14 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        // Así añadimos los servicios creados
+        // Asï¿½ aï¿½adimos los servicios creados
         builder.Services.AddScoped<MyDbContext>();
         builder.Services.AddScoped<UserRepository>();
 
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>
          {
-             string key = "nduncsdicunseu37846%$·(·/&(T/ñgb87";
+             string key = "nduncsdicunseu37846%$ï¿½(ï¿½/&(T/ï¿½gb87";
 
 
              options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
@@ -87,9 +87,9 @@ public class Program
         }
 
 
-        // Habilita la autenticación
+        // Habilita la autenticaciï¿½n
         app.UseAuthentication();
-        // Habilita la autorización
+        // Habilita la autorizaciï¿½n
         app.UseAuthorization();
 
 

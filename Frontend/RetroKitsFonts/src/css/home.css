@@ -1,0 +1,105 @@
+* {
+    
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .carousel {
+    margin-top: 5%;
+    position: static;
+    width: 70%;
+    max-width: 1200px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-left: 15%;
+    margin-bottom: 5%;
+  }
+  
+  .carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .carousel-btn.prev {
+    left: 10px;
+  }
+  
+  .carousel-btn.next {
+    right: 10px;
+  }
+  
+  .carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .productos-destacados {
+    text-align: center;
+    margin-top: 40px;
+    
+  }
+  
+  .productos-destacados h1 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 3%;
+  }
+  
+  .productos-galeria {
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+  }
+  
+  .productos-galeria img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ver-catalogo-btn {
+        margin: 5%;
+    background-color: #f8c716;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+    color: #f3f3f3;
+    width: 30%;
+    transition: 1s;
+  }
+  
+  .ver-catalogo-btn:hover {
+    background-color: #ffc800;
+  color: #0a0a0a;
+  }
+
+  hr{
+    width: 100%;
+    margin: 0;
+  }
