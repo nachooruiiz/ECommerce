@@ -29,7 +29,9 @@ export function Header() {
           <div className="nav-icons-header">
             <div>x</div>
             <div>x</div>
+            
             <div>x</div>
+            
           </div>
         </div>
       </div>
