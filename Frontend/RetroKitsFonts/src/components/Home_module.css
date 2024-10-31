@@ -1,0 +1,50 @@
+.main{
+    align-items: center;
+    text-align: center;
+}
+
+hr{
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 30px;
+}
+
+h2{
+    margin-bottom: 15px;
+}
+
+.carrusel{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.carrusel img{
+    min-width: 1075px;
+    min-height: 428px;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+.carrusel div{
+    width: 33%;
+    display: inline-block;
+    color: var(--primary-botton-color);
+    transition: 1s;
+}
+
+.carrusel div:hover{
+    color: var(--primary-botton-color-hover)
+}
+
+.colecciones{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.containerTarjetas{
+    display: flex;
+    gap: 10%;
+    padding-left: 17%;
+    margin-bottom: 30px;
+}
