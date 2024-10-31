@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../css/HeaderStyles.css";
 
 export function Header() {
@@ -10,7 +11,7 @@ export function Header() {
       <div className="contenido-header">
         {/* Sección izquierda: Logo */}
         <div className="header-logo">
-          <img className="img-header" src="public/Imagenes/Logo.png" alt="Logo" />
+          <img className="img-header" src="/Imagenes/Logo.png" alt="Logo" />
         </div>
 
         {/* Sección central: Navegación principal */}
@@ -29,8 +30,11 @@ export function Header() {
           <div className="nav-icons-header">
             <div>x</div>
             <div>x</div>
-            
+            <Link to="/login">
             <div>x</div>
+            </Link>
+                     
+            
             
           </div>
         </div>

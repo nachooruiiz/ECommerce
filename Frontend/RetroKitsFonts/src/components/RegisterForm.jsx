@@ -105,7 +105,12 @@ export default function RegisterForm() {
                         <br />
                         <button type="submit" className="button-form">REGISTRARSE</button>
                         <hr />
-                        <Link to="/" ><a className='link-login'>Iniciar Sesión</a></Link>
+                        
+                        <Link to="/login">
+              <button className="button-form">INICIAR SESION</button>
+            </Link>
+                        
+                        
                     </div>
                     {error && <p className='error' >{error}</p>}
                 </form>

@@ -6,7 +6,7 @@ header {
     background-color: #a32b2b;
     color: #f5f5f5;
     font-family: inter;
-    flex-direction: column;
+
     height: 170px;  /* Limita la altura del header */
     width: 100%;
     position: sticky;

@@ -5,7 +5,7 @@ export function Footer() {
         <footer>
             <div className="footer-top">
                 <div className="containerImg">
-                    <img className="img-footer" src="public/Imagenes/Logo.png" alt="La imagen no se puede cargar"/>
+                    <img className="img-footer" src="/Imagenes/Logo.png" alt="La imagen no se puede cargar"/>
                 </div>
                 
                 <nav className="nav-footer">
