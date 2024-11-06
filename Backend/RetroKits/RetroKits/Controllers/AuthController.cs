@@ -9,7 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace RetroKits;
+namespace RetroKits.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -88,7 +88,7 @@ public class AuthController : ControllerBase
         {
             return Unauthorized(data);
         }
-        
+
         // 2. Crear las claims y el token JWT
 
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -111,6 +111,6 @@ public class AuthController : ControllerBase
         string tokenString = tokenHandler.WriteToken(token);
 
         return Ok(tokenString);
-        
+
     }
 }

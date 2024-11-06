@@ -8,6 +8,7 @@ public class MyDbContext : DbContext
     private const string DATABSE_PATH = "ecommerce.db";
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -1,6 +1,9 @@
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
 using RetroKits.Database;
+using RetroKits.Database.Seeder;
 using RetroKits.Repository;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -38,9 +41,10 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        // As� a�adimos los servicios creados
+        // Así añadimos los servicios creados
         builder.Services.AddScoped<MyDbContext>();
         builder.Services.AddScoped<UserRepository>();
+        builder.Services.AddScoped<ProductRepository>();
 
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>
@@ -58,15 +62,9 @@ public class Program
 
          });
 
+       
         var app = builder.Build();
-
-        // Se crea la base de datos vacia
-        using (IServiceScope scope = app.Services.CreateScope())
-        {
-            MyDbContext dbContext = scope.ServiceProvider.GetService<MyDbContext>();
-            dbContext.Database.EnsureCreated();
-        }
-
+        
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -94,7 +92,24 @@ public class Program
 
 
         app.MapControllers();
+        //Llamamos al metodo
+        SeedDatabase(app.Services);
 
         app.Run();
+
+    }
+
+    //Metodo para crear y usar el Seeder
+    static void SeedDatabase(IServiceProvider serviceProvider)
+    {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        using MyDbContext dbContext = scope.ServiceProvider.GetService<MyDbContext>();
+
+        // Si no existe la base de datos entonces la creamos y ejecutamos el seeder
+        if (dbContext.Database.EnsureCreated())
+        {
+            Seeder seeder = new Seeder(dbContext);
+            seeder.Seed();
+        }
     }
 }
