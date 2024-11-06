@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace RetroKits.Database;
-//[Index(nameof(Name), IsUnique = true)]
+[Index(nameof(Name), IsUnique = true)]
 public class Product
 {
     public int Id { get; set; }

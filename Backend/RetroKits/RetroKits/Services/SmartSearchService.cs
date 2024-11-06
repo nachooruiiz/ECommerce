@@ -1,5 +1,6 @@
 ﻿using F23.StringSimilarity;
 using F23.StringSimilarity.Interfaces;
+using RetroKits.Database;
 using System.Globalization;
 using System.Text;
 
@@ -7,21 +8,21 @@ namespace RetroKits.Services;
 
 public class SmartSearchService
 {
+    private readonly MyDbContext _dbContext;
     private const double THRESHOLD = 0.75;
-    private static readonly string[] ITEMS = [
-        "Málaga",
-    ];
-
     private readonly INormalizedStringSimilarity _stringSimilarityComparer;
 
-    public SmartSearchService()
+    public SmartSearchService(MyDbContext dbContext)
     {
+        _dbContext = dbContext;
         _stringSimilarityComparer = new JaroWinkler();
     }
 
-    public IEnumerable<string> Search(string query)
+    public IEnumerable<Product> Search(string query, string option)
     {
-        IEnumerable<string> result;
+        List<Product> ITEMS = _dbContext.Products.ToList();
+        FilterService filterService = new FilterService();
+        IEnumerable<Product> result;
 
         // Si la consulta está vacía o solo tiene espacios en blanco, devolvemos todos los items
         if (string.IsNullOrWhiteSpace(query))
@@ -34,12 +35,12 @@ public class SmartSearchService
             // Limpiamos la query y la separamos por espacios
             string[] queryKeys = GetKeys(ClearText(query));
             // Aquí guardaremos los items que coincidan
-            List<string> matches = new List<string>();
+            List<Product> matches = new List<Product>();
 
-            foreach (string item in ITEMS)
+            foreach (Product item in ITEMS)
             {
                 // Limpiamos el item y lo separamos por espacios
-                string[] itemKeys = GetKeys(ClearText(item));
+                string[] itemKeys = GetKeys(ClearText(item.Name));
 
                 // Si coincide alguna de las palabras de item con las de query
                 // entonces añadimos item a la lista de coincidencias
@@ -50,9 +51,10 @@ public class SmartSearchService
             }
 
             result = matches;
+            
         }
 
-        return result;
+        return filterService.SortProducts(result, option);
     }
 
     private bool IsMatch(string[] queryKeys, string[] itemKeys)
