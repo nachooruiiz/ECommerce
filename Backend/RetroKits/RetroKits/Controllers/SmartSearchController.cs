@@ -2,24 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using RetroKits.Database;
 using RetroKits.Services;
+using System.Collections.Generic;
 
-namespace RetroKits.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
-public class SmartSearchController : ControllerBase
+namespace RetroKits.Controllers
 {
-    private readonly MyDbContext _dbContext;
-    public SmartSearchController(MyDbContext dbContext)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SmartSearchController : ControllerBase
     {
-        _dbContext = dbContext;
-    }
+        private readonly SmartSearchService _smartSearchService;
 
-    [HttpGet]
-    public IEnumerable<Product> Search([FromQuery] string query, [FromQuery] string option = "none")
-    {
-        SmartSearchService smartSearchService = new SmartSearchService(_dbContext);
+        // Inyección de dependencia para SmartSearchService
+        public SmartSearchController(SmartSearchService smartSearchService)
+        {
+            _smartSearchService = smartSearchService;
+        }
 
-        return smartSearchService.Search(query, option);
+        // Endpoint para realizar búsqueda con filtro y ordenación
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> Search([FromQuery] string query, [FromQuery] string option)
+        {
+            var products = _smartSearchService.Search(query, option);
+
+            return Ok(products);
+        }
     }
 }

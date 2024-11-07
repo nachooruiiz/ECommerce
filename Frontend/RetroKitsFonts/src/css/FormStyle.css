@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.imagenLogo {
+  margin-left: 46.5%;
+  width: 7%;
+  height: 7%;
+}
+
+.containerAll {
+  background-image: url("./../public/Imagenes/MRC.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 150% 120%;
+  padding: 4%;
+}
+
+.container {
+  text-align: center;
+  padding-top: 5%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-bottom: 5%;
+  margin-top: 5%;
+  margin-right: 30%;
+  margin-left: 37%;
+  border-radius: 1%;
+  background-color: #ebebeb;
+  align-content: center;
+  width: 25%;
+  height: 25%;
+}
+
+.button-form {
+  margin: 5%;
+  background-color: #f8c716;
+  border: none;
+  padding: 10px;
+  border-radius: 7px;
+  color: #f3f3f3;
+  width: 100%;
+  transition: 1s;
+}
+
+.button-form:hover {
+  background-color: #ffc800;
+  color: #0a0a0a;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.inputForm {
+  margin: 2%;
+  width: 100%;
+  height: 25%;
+  padding: 3%;
+  border: none;
+  color: rgb(122, 122, 122);
+  margin-left: -2%;
+  border: 1px solid #a7a7a7;
+  border-radius: 1%;
+}
+
+.formInput {
+  margin-top: 10%;
+  text-align: justify;
+}
+
+.buttons {
+  margin-left: -11%;
+}
+
+hr {
+  margin-left: 10%;
+}

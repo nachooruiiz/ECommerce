@@ -3,11 +3,13 @@ import '../css/FooterStyles.css';
 export function Footer() {
     return (
         <footer>
-            <div className="footer-top">
-                <div className="containerImg">
-                    <img className="img-footer" src="/Imagenes/Logo.png" alt="La imagen no se puede cargar"/>
-                </div>
-                
+            {/* Logo fuera del contenedor central para superponerlo */}
+            <div className="containerImg">
+                <img className="img-footer" src="/Imagenes/Logo.png" alt="La imagen no se puede cargar"/>
+            </div>
+
+            {/* Contenedor central con las secciones de enlaces */}
+            <div className="footer-center">
                 <nav className="nav-footer">
                     <div>
                         <h3>Sobre nosotros</h3>
@@ -23,11 +25,13 @@ export function Footer() {
                     <div>
                         <h3>Nuestras ligas</h3>
                         <p>Aviso de privacidad</p>
-                        <p>Política de coockies</p>
+                        <p>Política de cookies</p>
                         <p>Área legal</p>
                     </div>
                 </nav>
             </div>
+
+            {/* Área inferior para "Síguenos en:" y los iconos sociales */}
             <nav className="nav-icons">
                 <p>Síguenos en:</p>
                 <div className="social-icons">

@@ -1,24 +1,21 @@
 footer {
     background-color: #a32b2b;
     color: #f5f5f5;
-    position: relative;
-    height: 240px;
     font-family: inter;
     display: flex;
     flex-direction: column;
-}
-
-.footer-top {
-    display: flex;
-    height: 80%;
-}
-
-.containerImg {
-    height: 100%;
-    width: 15%;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Posiciona el logo en frente del contenedor central */
+.containerImg {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2; /* Coloca el logo en frente de .footer-center */
 }
 
 .img-footer {
@@ -26,60 +23,74 @@ footer {
     height: auto;
 }
 
-.nav-footer {
-    width: 80%;
+/* Contenedor central que ocupa todo el ancho y centra los enlaces */
+.footer-center {
+    width: 100%;
     display: flex;
-    justify-content: space-between; /* Asegura espacio igual entre secciones */
+    justify-content: center;
+    padding-top: 40px; /* Espacio para el logo superpuesto */
+    padding-bottom: 40px; /* Espacio para el área de "Síguenos en:" */
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.nav-footer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px; /* Limita el ancho de las secciones de enlaces */
     text-align: center;
-    padding: 20px 0;
+    gap: 40px;
 }
 
 .nav-footer div {
-    flex: 1; /* Hace que cada sección ocupe el mismo ancho */
-    padding: 0 20px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid #1a1a1a; /* Línea entre las secciones */
+    padding: 0 20px;
+    border-right: 1px solid #1a1a1a;
     box-sizing: border-box;
 }
 
 .nav-footer div:last-child {
-    border-right: none; /* Elimina la línea en el último elemento */
+    border-right: none;
 }
 
-.nav-footer div h3 {
-    font-size: 24px; /* Título más grande en píxeles */
+.nav-footer h3 {
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
-.nav-footer div p {
-    font-size: 14px; /* Texto de contenido más pequeño en píxeles */
-    margin-top: 17px; /* Margen superior entre los elementos p */
+.nav-footer p {
+    font-size: 0.875rem;
+    margin: 5px 0;
     font-weight: 100;
 }
 
+/* Área inferior para íconos sociales */
 .nav-icons {
-    width: 20%;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    width: 100%;
+    max-width: 200px;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 10px;
+    border: 1px solid black;
+    margin-left: 1000px;
 }
 
 .nav-icons p {
-    font-size: 14px; /* Tamaño reducido para “Síguenos en” */
     margin-bottom: 5px;
 }
 
-.nav-icons .social-icons {
+.social-icons {
     display: flex;
-    justify-content: space-between;
-    gap: 5px;
+    gap: 10px;
+    justify-content: center;
 }
 
-.nav-icons .social-icons img {
-    width: 20px; /* Tamaño de los iconos en píxeles */
-    height: 20px;
+.social-icons img {
+    width: 24px;
+    height: 24px;
 }

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using RetroKits.Database;
 using RetroKits.Database.Seeder;
 using RetroKits.Repository;
+using RetroKits.Services;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -45,6 +46,7 @@ public class Program
         builder.Services.AddScoped<MyDbContext>();
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
+        builder.Services.AddScoped<SmartSearchService>();
 
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>
@@ -74,7 +76,9 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        
+        // Habilita el servicio de archivos estáticos
+        app.UseStaticFiles();
+        app.UseRouting();
 
         if (app.Environment.IsDevelopment())
         {
