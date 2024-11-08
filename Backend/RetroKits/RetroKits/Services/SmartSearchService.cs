@@ -20,7 +20,7 @@ namespace RetroKits.Services
             _stringSimilarityComparer = new JaroWinkler();
         }
 
-        public IEnumerable<Product> Search(string query, string option)
+        public IEnumerable<Product> Search(string query, string option, int page, int pageSize)
         {
             List<Product> items = _dbContext.Products.ToList();
             FilterService filterService = new FilterService();
@@ -49,9 +49,12 @@ namespace RetroKits.Services
 
                 result = matches;
             }
+            result = filterService.SortProducts(result, option);
+
+            result = result.Skip((page - 1) * pageSize).Take(pageSize);
 
             // Aplicar ordenación si es necesario
-            return filterService.SortProducts(result, option);
+            return result;
         }
 
         private bool IsMatch(string[] queryKeys, string[] itemKeys)

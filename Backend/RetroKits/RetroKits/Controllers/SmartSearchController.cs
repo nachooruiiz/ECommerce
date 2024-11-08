@@ -20,9 +20,9 @@ namespace RetroKits.Controllers
 
         // Endpoint para realizar búsqueda con filtro y ordenación
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Search([FromQuery] string query, [FromQuery] string option = "none")
+        public ActionResult<IEnumerable<Product>> Search([FromQuery] string? query, [FromQuery] string option = "none", [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
         {
-            var products = _smartSearchService.Search(query, option);
+            var products = _smartSearchService.Search(query, option, page, pageSize);
 
             return Ok(products);
         }
