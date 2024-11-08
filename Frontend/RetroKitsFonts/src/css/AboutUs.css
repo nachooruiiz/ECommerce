@@ -1,0 +1,105 @@
+body {
+  width: 100%;
+}
+
+h2 {
+  padding-bottom: 2%;
+  
+}
+
+hr {
+  line-height: 100;
+}
+
+p {
+  font-size: 14px;
+  padding-top: 4%;
+}
+
+.sobreNosotros {
+background-color: aliceblue;
+width: 100%;
+height: auto;
+max-height: 33%;
+display: flex;
+gap: 160px;
+padding:3%;
+align-items: center;
+padding-left: 15%;
+}
+
+
+
+#sobreNosotrosIMG {
+  width: 100%;          /* La imagen ocupará el 100% del ancho del contenedor */
+  max-width: 247px;     /* Establece un ancho máximo para evitar que se expanda demasiado */
+  height: 285px;         /* Permite que la altura se ajuste proporcionalmente */
+  object-fit: cover;    /* Cubre todo el área disponible manteniendo la calidad */
+  image-rendering: auto; /* Asegura que el navegador renderice la imagen con la mejor calidad */
+}
+
+  
+
+
+.texto1 {
+  width: 55%;
+  padding-bottom: 6%;
+}
+
+.texto1 hr {
+  width: 100%; /* Ajusta la longitud de la línea aquí */
+  height: 2px;
+  background-color: black;
+  border: none;
+  margin: 4px 0 16px 0; /* Añade espacio encima y debajo de la línea */
+}
+
+.texto1 .hr-blanco {
+  background-color: white !important; /* Usa !important para asegurarte de que se aplique el color */
+}
+
+
+.queHacemos {
+  background-color: rgb(32, 32, 31);
+  width: 100%;
+  height: auto;
+  max-height: 33%;
+  display: flex;
+  gap: 160px;
+  padding:3%;
+  align-items: center;
+  padding-left: 15%;
+  color: white;
+}
+
+
+#queHacemosIMG {
+  width: 100%;          /* La imagen ocupará el 100% del ancho del contenedor */
+  max-width: 247px;     /* Establece un ancho máximo para evitar que se expanda demasiado */
+  height: 285px;         /* Permite que la altura se ajuste proporcionalmente */
+  object-fit: cover;    /* Cubre todo el área disponible manteniendo la calidad */
+  image-rendering: auto;
+}
+
+.nuestroEquipo {
+  background-color: aliceblue;
+  width: 100%;
+  height: 33%;
+  padding:3%;
+}
+
+.imagenesNosotros {
+  padding-top: 3%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+}
+
+#nosotros {
+  width: 160px;
+  height:160px;
+  border-radius: 180px;
+}
+

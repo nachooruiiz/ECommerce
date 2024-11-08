@@ -1,105 +1,147 @@
 * {
     
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-  }
-  
-  .carousel {
-    margin-top: 5%;
-    position: static;
-    width: 70%;
-    max-width: 1200px;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-left: 15%;
-    margin-bottom: 5%;
-  }
-  
-  .carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .carousel-slide img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .carousel-btn {
-    position: absolute;
-    top: 80%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-  }
-  
-  .carousel-btn.prev {
-    left: 10px;
-  }
-  
-  .carousel-btn.next {
-    right: 10px;
-  }
-  
-  .carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .productos-destacados {
-    text-align: center;
-    margin-top: 40px;
-    
-  }
-  
-  .productos-destacados h1 {
-    font-size: 42px;
-    color: #333;
-    margin-bottom: 3%;
-  }
-  
-  .productos-galeria {
-    display: flex;
-    justify-content: center;
-    gap: 10%;
-  }
-  
-  .productos-galeria img {
-    width: 300px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .ver-catalogo-btn {
-        margin: 5%;
-    background-color: #f8c716;
-    border: none;
-    padding: 10px;
-    border-radius: 7px;
-    color: #f3f3f3;
-    width: 30%;
-    transition: 1s;
-  }
-  
-  .ver-catalogo-btn:hover {
-    background-color: #ffc800;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.carousel {
+  margin: 5% auto; /* Centra el carrusel horizontalmente */
+  position: relative; /* Cambiado a relative para botones de navegación */
+  width: 80%;
+  max-width: 1000px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%; /* Centrado verticalmente */
+  transform: translateY(-50%); /* Ajusta el centro del botón al medio */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 1; /* Asegura que el botón esté sobre las imágenes */
+}
+
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.productos-destacados {
+  text-align: center;
+  margin-top: 40px;
+  padding: 0 20px; /* Asegura que haya espacio en los laterales en pantallas pequeñas */
+}
+
+/* Título de la sección */
+.productos-destacados h1 {
+  font-size: 42px;
+  color: #333;
+  margin-bottom: 3%;
+}
+
+.productos-galeria {
+  display: flex;
+  justify-content: center;
+  gap: 5%; /* Reduce el gap para hacer más espacio en pantallas pequeñas */
+  flex-wrap: wrap; /* Permite que las imágenes se ajusten a otra fila si es necesario */
+}
+
+/* Estilos de las imágenes en la galería */
+.productos-galeria img {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+}
+
+/* Botón del catálogo */
+.ver-catalogo-btn {
+  margin: 5%;
+  background-color: #f8c716;
+  border: none;
+  padding: 10px;
+  border-radius: 7px;
+  color: #f3f3f3;
+  width: 30%;
+  transition: background-color 0.3s ease;
+}
+
+.ver-catalogo-btn:hover {
+  background-color: #ffc800;
   color: #0a0a0a;
+}
+
+/* Línea divisora */
+hr {
+  width: 100%;
+  margin: 0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .productos-destacados h1 {
+      font-size: 32px; /* Tamaño de fuente menor en pantallas pequeñas */
   }
 
-  hr{
-    width: 100%;
-    margin: 0;
+  .productos-galeria {
+      gap: 20px; /* Menor espacio entre imágenes en pantallas pequeñas */
   }
+
+  .productos-galeria img {
+      width: 100%; /* Ocupa el 100% del contenedor en pantallas pequeñas */
+      max-width: 300px; /* Límite para que no se agranden demasiado en dispositivos medianos */
+  }
+
+  .ver-catalogo-btn {
+      width: 60%; /* Botón más ancho en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .productos-destacados h1 {
+      font-size: 28px; /* Aún más pequeño en pantallas muy pequeñas */
+  }
+
+  .productos-galeria img {
+      width: 90%; /* Ocupa casi todo el ancho en pantallas pequeñas */
+      max-width: 250px; /* Límite para que no se desborde */
+  }
+
+  .ver-catalogo-btn {
+      width: 80%; /* Ocupa más ancho del contenedor en pantallas muy pequeñas */
+  }
+}
