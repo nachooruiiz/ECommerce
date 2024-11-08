@@ -18,18 +18,5 @@ namespace RetroKits.Services
                 _ => products // Si no hay opción, no se ordena
             };
         }
-
-        // Método para filtrar productos por nombre o precio
-        /*
-        public IEnumerable<Product> FilterProducts(IEnumerable<Product> products, string searchQuery)
-        {
-            if (string.IsNullOrEmpty(searchQuery))
-            {
-                return products;  // Si no hay consulta de búsqueda, devolver todos los productos
-            }
-
-            return products.Where(p => p.Name.Contains(searchQuery, System.StringComparison.OrdinalIgnoreCase) || p.Price.Contains(searchQuery));
-        }
-        */
     }
 }

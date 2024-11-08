@@ -10,9 +10,9 @@ export default function Catalogo() {
     // Llamada para obtener productos filtrados
     const fetchProducts = async (query, sortOption) => {
         try {
-            const url = query 
-                ? `https://localhost:7261/api/SmartSearch?query=${query}&option=${sortOption}` 
-                : `https://localhost:7261/api/Product?option=${sortOption}`; // Si no hay query, obtener todos productos con opción de ordenación
+
+            const url = `https://localhost:7261/api/SmartSearch?query=${query}&option=${sortOption}`; 
+            
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error("Error al obtener productos");
