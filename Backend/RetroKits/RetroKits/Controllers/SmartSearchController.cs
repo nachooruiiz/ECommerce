@@ -20,9 +20,12 @@ namespace RetroKits.Controllers
 
         // Endpoint para realizar búsqueda con filtro y ordenación
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Search([FromQuery] string? query, [FromQuery] string option = "none", [FromQuery] int page = 1, [FromQuery] int pageSize = 5)
+        public ActionResult<IEnumerable<Product>> Search([FromQuery] string? query, [FromQuery] string option = "none", [FromQuery] int page = 1, [FromQuery] int pageSize = 3)
         {
-            var products = _smartSearchService.Search(query, option, page, pageSize);
+            var (products, totalPages) = _smartSearchService.Search(query, option, page, pageSize);
+
+            Response.Headers.Add("X-Total-Count", totalPages.ToString());
+            Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
 
             return Ok(products);
         }

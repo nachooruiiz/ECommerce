@@ -42,6 +42,21 @@ namespace RetroKits.Controllers
             return Ok(productDtos);
         }
 
+        [HttpGet("mostrarproduct")]
+        public ActionResult<IEnumerable<ProductDto>> GetOneProduct([FromQuery] int id_product)
+        {
+            var producto = _dbContext.Products.SingleOrDefault(u => u.Id == id_product);
+
+            if (producto != null)
+            {
+                return Ok(producto);
+            }
+            else
+            {
+                return Conflict("El producto no existe o no ha sido encontrado");
+            }
+        }
+
         // POST: api/product/registroproduct
         [HttpPost("registroproduct")]
         public ActionResult RegisterProduct([FromBody] ProductDto data)
