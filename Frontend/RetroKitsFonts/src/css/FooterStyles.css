@@ -10,12 +10,11 @@ footer {
     position: relative;
 }
 
-/* Posiciona el logo en frente del contenedor central */
 .containerImg {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2; /* Coloca el logo en frente de .footer-center */
+    top: 30%;
+    left: 1.5%;
+    z-index: 2;
 }
 
 .img-footer {
@@ -23,61 +22,68 @@ footer {
     height: auto;
 }
 
-/* Contenedor central que ocupa todo el ancho y centra los enlaces */
 .footer-center {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 40px; /* Espacio para el logo superpuesto */
-    padding-bottom: 40px; /* Espacio para el área de "Síguenos en:" */
+    padding-top: 40px;
+    padding-bottom: 20px;
     box-sizing: border-box;
     z-index: 1;
 }
 
 .nav-footer {
     display: flex;
-    justify-content: space-between;
-    max-width: 800px; /* Limita el ancho de las secciones de enlaces */
+    justify-content: center;
+    gap: 250px; /* Espacio entre las secciones */
+    max-width: 1000px; /* Ajusta si es necesario */
     text-align: center;
-    gap: 40px;
+    position: relative;
 }
 
 .nav-footer div {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 20px;
-    border-right: 1px solid #1a1a1a;
+    width: 180px; /* Ancho fijo para mantener el mismo tamaño para cada sección */
     box-sizing: border-box;
+    position: relative;
 }
 
-.nav-footer div:last-child {
-    border-right: none;
+/* Borde simétrico entre secciones */
+.nav-footer div:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -125px; /* Ajusta la posición según el nuevo gap de 250px */
+    height: 100%;
+    border-right: 1px solid white;
 }
 
 .nav-footer h3 {
     font-size: 1.5rem;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
+    white-space: nowrap; /* Evita que el texto del h3 se divida en dos líneas */
 }
 
 .nav-footer p {
     font-size: 0.875rem;
-    margin: 5px 0;
+    margin: 10px 0;
     font-weight: 100;
+    text-align: center;
 }
 
-/* Área inferior para íconos sociales */
+/* Área inferior para íconos sociales alineada a la derecha */
 .nav-icons {
     width: 100%;
     max-width: 200px;
-    margin-top: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: 1px solid black;
-    margin-left: 1000px;
+    margin-top: auto;
+    margin-right: 20px;
+    align-self: flex-end;
 }
 
 .nav-icons p {
@@ -91,6 +97,38 @@ footer {
 }
 
 .social-icons img {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
+}
+
+
+.sprite {
+    .sprite {
+        background-image: url("/Imagenes/spritesheet.png");
+        background-repeat: no-repeat;
+        display: block;
+    }
+    
+    width: 18px;
+    height: 18px;
+}
+
+.sprite-Instagram {
+    background-position: -5px -5px;
+}
+
+.sprite-WhatsApp {
+    background-position: -2063px -5px;
+}
+
+.sprite-X {
+    background-position: -5px -2063px;
+}
+
+.sprite-tiktok {
+    background-position: -2585px -5px;
+}
+
+.sprite-youtube {
+    background-position: -3315px -5px;
 }

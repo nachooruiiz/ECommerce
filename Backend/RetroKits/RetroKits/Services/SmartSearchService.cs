@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RetroKits.Services
 {
@@ -20,9 +21,10 @@ namespace RetroKits.Services
             _stringSimilarityComparer = new JaroWinkler();
         }
 
-        public IEnumerable<Product> Search(string query, string option)
+        public (IEnumerable<Product> products, int totalPages) Search(string query, string option, int page, int pageSize)
         {
             List<Product> items = _dbContext.Products.ToList();
+            int totalProducts = _dbContext.Products.Count();
             FilterService filterService = new FilterService();
             IEnumerable<Product> result;
 
@@ -46,12 +48,19 @@ namespace RetroKits.Services
                         matches.Add(item);
                     }
                 }
-
-                result = matches;
+                result = matches;                
             }
 
-            // Aplicar ordenación si es necesario
-            return filterService.SortProducts(result, option);
+            // Se hace el cálculo total de páginas que se pueden mostrar
+            int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+            // Realiza la ordenación de productos
+            result = filterService.SortProducts(result, option);
+
+            // Hace la paginación por defecto
+            result = result.Skip((page - 1) * pageSize).Take(pageSize);
+
+            return (result, totalPages);
         }
 
         private bool IsMatch(string[] queryKeys, string[] itemKeys)
