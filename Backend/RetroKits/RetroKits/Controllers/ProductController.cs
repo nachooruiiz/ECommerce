@@ -36,7 +36,9 @@ namespace RetroKits.Controllers
                 Name = p.Name,
                 Price = p.Price,
                 Description = p.Description,
-                ImageUrl = p.ImageUrl
+                ImageUrl = p.ImageUrl,
+                Stock = p.Stock,
+                Long_description = p.Long_description,
             });
 
             return Ok(productDtos);
@@ -76,6 +78,8 @@ namespace RetroKits.Controllers
                 Price = data.Price,
                 Description = data.Description,
                 ImageUrl = data.ImageUrl,
+                Stock = data.Stock,
+                Long_description = data.Long_description,
             };
 
             _dbContext.Products.Add(newProduct);
