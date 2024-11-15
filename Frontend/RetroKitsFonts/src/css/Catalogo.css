@@ -6,6 +6,10 @@
   color: #333;
 }
 
+h2 {
+  color: black;
+}
+
 h1 {
   font-size: 2em;
   margin-bottom: 20px;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import '../css/Catalogo.css';
 
 export default function Catalogo() {
@@ -97,12 +98,14 @@ export default function Catalogo() {
             {/* Mostrar productos */}
             <div className="product-grid">
                 {products.map((product, index) => (
-                    <div key={index} className="product-item">
+                    <Link to={`/Catalogo/${product.id}`} key={product.id}>
+                        <div key={index} className="product-item">
                         <img src={product.imageUrl} alt={product.name} className="product-image" />
                         <h2>{product.name}</h2>
-                        <p className='product-description'>{product.description}</p>
+                        <p className="product-description">{product.description}</p>
                         <p className="product-price">{product.price}€</p>
-                    </div>
+                        </div>
+                    </Link>
                 ))}
             </div>
 
