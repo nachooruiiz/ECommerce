@@ -52,7 +52,7 @@ export default function DetalleDeProducto() {
           {/* Imagen del producto */}
           <div className="detalle-producto-imagen-container">
             <img
-              src={product.imageUrl}
+              src={`https://localhost:7261${product.imageUrl}`}
               alt={product.name}
               className="detalle-producto-imagen"
             />
