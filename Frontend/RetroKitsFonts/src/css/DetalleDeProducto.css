@@ -1,22 +1,176 @@
-.detalle-producto {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .detalle-image {
-    max-width: 400px;
-    height: auto;
-    margin: 20px 0;
-  }
-  
-  .detalle-description {
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  
-  .detalle-price {
-    font-size: 22px;
-    font-weight: bold;
-    color: #333;
-  }
-  
+/* Contenedor principal */
+.detalle-producto-container {
+  display: flex; /* Flexbox para alinear elementos en fila */
+  flex-direction: row; /* Los hijos estarán uno al lado del otro */
+  gap: 20px; /* Espaciado entre los bloques */
+  align-items: flex-start; /* Alinear elementos al inicio verticalmente */
+  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  margin: 20px auto; /* Centra horizontalmente */
+}
+
+/* Imagen del producto */
+.detalle-producto-contenido {
+  flex: 1; /* Ocupa el 50% del espacio disponible */
+}
+
+.detalle-producto-imagen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalle-producto-imagen {
+  max-width: 100%; /* La imagen ocupa todo el ancho disponible */
+  height: auto; /* Mantén la proporción */
+  border-radius: 10px; /* Opcional: bordes redondeados */
+}
+
+
+/* Detalles del producto */
+.detalle-producto-detalles {
+  flex: 1; /* Ocupa el 50% del espacio disponible */
+  display: flex;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  gap: 15px; /* Espaciado entre los elementos */
+}
+
+.detalle-producto-detalles h1 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+}
+
+.detalle-producto-precio {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.boton-comprar {
+  background-color: #FFD700;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+
+.boton-comprar:hover {
+  background-color: #FFA500;
+}
+
+.detalle-producto-descripcion {
+  margin-top: 20px;
+  font-size: 1.1em;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Sección de reseñas */
+.reviews {
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.reviews h1 {
+  font-size: 1.8em;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.reviews h3 {
+  margin: 20px 0 5px;
+  font-size: 1.2em;
+}
+
+.reviews p {
+  font-size: 1em;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Sección de productos relacionados */
+.productos-relacionados {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+.productos-relacionados h1 {
+  font-size: 1.8em;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.imagenes-relacionadas-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.imagenes-relacionadas {
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imagenes-relacionadas:hover {
+  transform: scale(1.1);
+}
+
+/* Contenedor principal de reseñas y productos relacionados */
+.contenedor-reviews-relacionados {
+  display: flex; /* Flexbox para alinear en fila */
+  flex-direction: row; /* Alineación horizontal */
+  gap: 40px; /* Espaciado entre secciones */
+  justify-content: space-between; /* Separa los bloques */
+  align-items: flex-start; /* Alineación vertical al inicio */
+  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
+  margin: 40px auto; /* Centrado horizontal */
+}
+
+/* Estilo de la sección de reseñas */
+.reviews {
+  flex: 2; /* Ocupa más espacio que los productos relacionados */
+  padding-right: 20px; /* Espaciado derecho */
+}
+
+.reviews h1,
+.reviews h3 {
+  margin-bottom: 10px;
+}
+
+.reviews p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 1em;
+}
+
+/* Estilo de la sección de productos relacionados */
+.productos-relacionados {
+  flex: 1; /* Ocupa menos espacio que las reseñas */
+}
+
+.productos-relacionados h1 {
+  margin-bottom: 20px;
+}
+
+.imagenes-relacionadas-container {
+  display: flex; /* Flexbox para las imágenes */
+  flex-wrap: wrap; /* Permite que las imágenes se ajusten */
+  gap: 10px; /* Espaciado entre imágenes */
+}
+
+.imagenes-relacionadas {
+  width: 100px; /* Ajusta el tamaño de las imágenes */
+  height: 100px;
+  object-fit: cover; /* Asegura que las imágenes mantengan proporción */
+  border-radius: 5px; /* Bordes redondeados */
+}

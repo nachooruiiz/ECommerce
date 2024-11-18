@@ -104,6 +104,7 @@ export default function Catalogo() {
                         <h2>{product.name}</h2>
                         <p className="product-description">{product.description}</p>
                         <p className="product-price">{product.price}€</p>
+                        
                         </div>
                     </Link>
                 ))}
