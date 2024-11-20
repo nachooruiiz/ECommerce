@@ -11,6 +11,9 @@ public class MyDbContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Review> Reviews { get; set; }
 
+    public DbSet<Cart> Carts { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -32,5 +35,10 @@ public class MyDbContext : DbContext
             .WithMany()
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Cart>()
+            .HasMany(c => c.Items)
+            .WithOne(i => i.Cart)
+            .HasForeignKey(i => i.CartId);
     }
 }
