@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.IdentityModel.Tokens;
+using RetroKits.Controllers;
 using RetroKits.Database;
 using RetroKits.Database.Seeder;
 using RetroKits.Repository;
@@ -47,6 +48,7 @@ public class Program
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
         builder.Services.AddScoped<SmartSearchService>();
+        builder.Services.AddScoped<ReviewController>();
 
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>

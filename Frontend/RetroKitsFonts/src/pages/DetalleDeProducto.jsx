@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../css/DetalleDeProducto.css";
+import Resenas from "../components/Resenas";
 
 export default function DetalleDeProducto() {
   const { id } = useParams(); // Obtén el ID del producto desde la URL
@@ -63,8 +64,24 @@ export default function DetalleDeProducto() {
           <h1>{product.name}</h1>
           <p className="detalle-producto-precio">{product.price}€</p>
           <p className="detalle-producto-stock">Stock: {product.stock}</p>
+        
+            <div className="desplegable-talla">
+            <label for="tallas">Talla : </label>
+            <select id="tallas" name="tallas" >
+              <option value="" disabled selected>Elige una opción</option>
+              <option value="XS">XS (Extra Small)</option>
+              <option value="S">S (Small)</option>
+              <option value="M">M (Medium)</option>
+              <option value="L">L (Large)</option>
+              <option value="XL">XL (Extra Large)</option>
+              <option value="XXL">XXL (2XL)</option>
+            </select>
+            </div>
+            <div className="botones-detalle">
           <button className="boton-comprar">Añadir al carrito</button>
           <button className="boton-comprar">Comprar ya</button>
+          </div>
+          <h2>Historia</h2>
           <p className="detalle-producto-descripcion">
             {product.long_description}
           </p>
@@ -113,6 +130,7 @@ export default function DetalleDeProducto() {
         {/* Sección de productos relacionados */}
         <div className="productos-relacionados">
           <h1>Productos relacionados</h1>
+          <Link to="./../">
           <div className="imagenes-relacionadas-container">
             {relatedProducts.length > 0 ? (
               relatedProducts.map((relatedProduct) => (
@@ -153,8 +171,11 @@ export default function DetalleDeProducto() {
               </>
             )}
           </div>
+          </Link>
         </div>
+        
       </div>
+      <Resenas productId={product.id} token={localStorage.getItem("token")}/>
     </>
   );
 }
