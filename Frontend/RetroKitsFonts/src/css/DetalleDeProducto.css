@@ -31,7 +31,9 @@
   flex: 1; /* Ocupa el 50% del espacio disponible */
   display: flex;
   flex-direction: column; /* Alinea los elementos verticalmente */
-  gap: 15px; /* Espaciado entre los elementos */
+  gap: 15px; 
+  padding-left: 10%;/* Espaciado entre los elementos */
+  margin-top:7% ;
 }
 
 .detalle-producto-detalles h1 {
@@ -47,7 +49,7 @@
 
 .boton-comprar {
   background-color: #FFD700;
-  color: white;
+  color: #333;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -55,6 +57,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   margin-right: 10px;
+  width: 45%;
 }
 
 .boton-comprar:hover {
@@ -155,22 +158,38 @@
 
 /* Estilo de la sección de productos relacionados */
 .productos-relacionados {
-  flex: 1; /* Ocupa menos espacio que las reseñas */
+  flex: 3; /* Ocupa menos espacio que las reseñas */
 }
 
 .productos-relacionados h1 {
-  margin-bottom: 20px;
+  margin-bottom: 10%;
 }
 
 .imagenes-relacionadas-container {
   display: flex; /* Flexbox para las imágenes */
   flex-wrap: wrap; /* Permite que las imágenes se ajusten */
-  gap: 10px; /* Espaciado entre imágenes */
+  gap: 10px;
+  min-width: 200px /* Espaciado entre imágenes */
 }
 
 .imagenes-relacionadas {
-  width: 100px; /* Ajusta el tamaño de las imágenes */
-  height: 100px;
+  width: 250px; /* Ajusta el tamaño de las imágenes */
+  height: 325px;
   object-fit: cover; /* Asegura que las imágenes mantengan proporción */
   border-radius: 5px; /* Bordes redondeados */
+}
+#tallas{
+  padding: 5px; 
+  font-size: 14px; 
+  border: 1px solid #ddd; 
+  border-radius: 5px;
+}
+
+.desplegable-talla{
+  font-size: 24px;
+  margin-bottom: 10%;
+}
+
+.botones-detalle{
+  margin-bottom: 5%;
 }

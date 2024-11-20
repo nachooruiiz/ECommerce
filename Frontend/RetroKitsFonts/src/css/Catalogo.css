@@ -109,8 +109,3 @@ h1 {
     width: 8%;
     transition: background-color 0.3s ease;
 }
-
-.boton-paginas:hover{
-  background-color: #FFA500;
-}
-

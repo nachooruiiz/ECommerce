@@ -100,7 +100,7 @@ export default function Catalogo() {
                 {products.map((product, index) => (
                     <Link to={`/Catalogo/${product.id}`} key={product.id}>
                         <div key={index} className="product-item">
-                        <img src={`https://localhost:7261${product.imageUrl}`} alt={product.name} className="product-image" />
+                        <img src={product.imageUrl} alt={product.name} className="product-image" />
                         <h2>{product.name}</h2>
                         <p className="product-description">{product.description}</p>
                         <p className="product-price">{product.price}€</p>
