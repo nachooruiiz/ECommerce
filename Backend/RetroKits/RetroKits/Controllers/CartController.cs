@@ -4,13 +4,14 @@
     using global::RetroKits.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using System.Security.Claims;
 
     namespace RetroKits.Controllers
     {
         [Route("api/[controller]")]
         [ApiController]
-        //[Authorize] // Asegura que solo usuarios autenticados accedan
+        //[Authorize]
         public class CartController : ControllerBase
         {
             private readonly MyDbContext _context;
@@ -38,7 +39,9 @@
                             i.ProductId,
                             i.Product.Name,
                             i.Quantity,
-                            i.Product.Price
+                            i.Product.Price,
+                            i.Product.Stock,
+                            i.Product.ImageUrl,
                         })
                     })
                     .FirstOrDefault();
@@ -71,7 +74,9 @@
                 }
 
                 // Buscar el carrito del usuario o crear uno nuevo
-                var cart = _context.Carts.FirstOrDefault(c => c.UserId == userId);
+                var cart = _context.Carts
+                    .Include(c => c.Items)
+                    .FirstOrDefault(c => c.UserId == userId);
                 if (cart == null)
                 {
                     cart = new Cart { UserId = userId };
@@ -80,7 +85,8 @@
                 }
 
                 // Verificar si el producto ya está en el carrito
-                var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == itemDto.ProductId);
+                var existingItem = cart.Items.SingleOrDefault(i => i.ProductId == itemDto.ProductId);
+
                 if (existingItem != null)
                 {
                     // Comprobar si la cantidad total excede el stock disponible
@@ -135,11 +141,13 @@
 
             // Eliminar un producto del carrito
             [HttpDelete("RemoveItem/{productId}")]
-            public IActionResult RemoveItem(int productId)
+            public IActionResult RemoveItem([FromRoute] int productId)
             {
                 var userId = int.Parse(User.FindFirstValue("id"));
 
-                var cart = _context.Carts.FirstOrDefault(c => c.UserId == userId);
+                var cart = _context.Carts
+                    .Include(c => c.Items)
+                    .FirstOrDefault(c => c.UserId == userId);
                 if (cart == null)
                 {
                     return NotFound("No se encontró un carrito para este usuario.");
