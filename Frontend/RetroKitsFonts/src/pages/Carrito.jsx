@@ -104,16 +104,16 @@ const Carrito = () => {
   }, []);
 
   return (
-    <div>
+    <div className="carrito-layout">
       <h2>Carrito de Compras</h2>
 
       {carrito.length > 0 ? (
-        <ul>
+        <ul className="productos-carrito">
           {carrito.map((item) => (
-            <li key={item.productId}>
+            <li key={item.productId} className="producto">
               <p>
-                <img src={`https://localhost:7261${item.imageUrl}`}></img>
-                <strong>{item.name}</strong> - {item.price}€ x {item.quantity}
+                <img src={`https://localhost:7261${item.imageUrl}`} className="imagen-producto-carrito"></img>
+                <strong className="descripcion-pedido">{item.name}</strong> - {item.price}€ x {item.quantity}
               </p>
               <input
                 type="number"
@@ -124,7 +124,7 @@ const Carrito = () => {
                   actualizarCantidad(item.productId, parseInt(e.target.value))
                 }
               />
-              <button onClick={() => eliminarDelCarrito(item.productId)}>
+              <button onClick={() => eliminarDelCarrito(item.productId)} className="eliminar-btn">
                 Eliminar
               </button>
             </li>
@@ -134,7 +134,7 @@ const Carrito = () => {
         <p>No tienes productos en tu carrito.</p>
       )}
 
-      <button onClick={vaciarCarrito} className="boton-vaciar">
+      <button onClick={vaciarCarrito} className="eliminar-btn">
         Vaciar Carrito
       </button>
       {mensaje && <p>{mensaje}</p>}
