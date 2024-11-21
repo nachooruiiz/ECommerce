@@ -10,7 +10,7 @@
     {
         [Route("api/[controller]")]
         [ApiController]
-        //[Authorize] // Asegura que solo usuarios autenticados accedan
+        //[Authorize]
         public class CartController : ControllerBase
         {
             private readonly MyDbContext _context;

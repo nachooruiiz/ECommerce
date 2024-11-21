@@ -1,0 +1,134 @@
+/* Estructura principal del carrito */
+.contenido-carrito {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Diseño de la disposición del carrito */
+.carrito-layout {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Sección de productos */
+.productos-carrito {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.producto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.imagen-producto-carrito {
+  width: 150px;
+  height: auto;
+  border-radius: 7px;
+}
+
+.descripcion-pedido {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.nombre-producto {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.talla, .precio {
+  font-size: 16px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter button {
+  background-color: white;
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.counter span {
+  font-size: 16px;
+}
+
+/* Sección de tramitar pedido (subtotal) */
+.tramitar-pedido {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+}
+
+.tramitar-pedido h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.ver-catalogo-btn {
+  background-color: #ffc107;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 75%;
+}
+
+.ver-catalogo-btn:hover {
+  background-color: #e0a800;
+}
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter button {
+  background-color: white;
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.counter span {
+  font-size: 16px;
+}
+
+.eliminar-btn {
+  margin-top: 10px;
+  background-color: #f44336; /* Rojo */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.eliminar-btn:hover {
+  background-color: #d32f2f;
+}
+

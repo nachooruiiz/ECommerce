@@ -8,6 +8,7 @@ import AboutUs from "./pages/AboutUs";
 import Catalogo from "./pages/Catalogo";
 import DetalleDeProducto from "./pages/DetalleDeProducto";
 import "./../src/css/estilosGenerales.css";
+import Carrito from "./pages/Carrito";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/Catalogo" element={<Catalogo />} />
         {/* Ruta dinámica para los detalles del producto */}
         <Route path="/Catalogo/:id" element={<DetalleDeProducto />} />
+        <Route path="/Carrito" element={<Carrito/>}/>
       </Routes>
       <Footer />
     </Router>

@@ -36,8 +36,7 @@ public class ReviewController : Controller
         }
 
         // Buscar en el token el id del usuario autenticado
-        //var userId = int.Parse(User.FindFirstValue("id"));
-        var userId = 1;
+        var userId = int.Parse(User.FindFirstValue("id"));
         var user = _dbContext.Users.Find(userId);
         if (user == null)
         {
