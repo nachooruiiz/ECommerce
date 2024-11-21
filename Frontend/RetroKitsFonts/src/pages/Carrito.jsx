@@ -17,9 +17,7 @@ const Carrito = () => {
       
       if (response.ok) {
         const data = await response.json();
-        setCarrito(data);
-        console.log(data)
-          console.log(carrito)
+        setCarrito(data.items);
       } else {
         console.error("Error al cargar el carrito.");
       }
@@ -66,7 +64,7 @@ const Carrito = () => {
           },
         }
       );
-
+      
       if (response.ok) {
         setMensaje("Producto eliminado del carrito con éxito.");
         cargarCarrito();
@@ -108,22 +106,20 @@ const Carrito = () => {
   return (
     <div>
       <h2>Carrito de Compras</h2>
-      <button onClick={vaciarCarrito} className="boton-vaciar">
-        Vaciar Carrito
-      </button>
 
       {carrito.length > 0 ? (
         <ul>
           {carrito.map((item) => (
-            <li key={item.id}>
+            <li key={item.productId}>
               <p>
-                <strong>{item.nombre}</strong> - {item.precio}€ x {item.cantidad}
+                <img src={`https://localhost:7261${item.imageUrl}`}></img>
+                <strong>{item.name}</strong> - {item.price}€ x {item.quantity}
               </p>
               <input
                 type="number"
                 min="1"
                 max={item.stock}
-                defaultValue={item.cantidad}
+                defaultValue={item.quantity}
                 onBlur={(e) =>
                   actualizarCantidad(item.productId, parseInt(e.target.value))
                 }
@@ -138,6 +134,9 @@ const Carrito = () => {
         <p>No tienes productos en tu carrito.</p>
       )}
 
+      <button onClick={vaciarCarrito} className="boton-vaciar">
+        Vaciar Carrito
+      </button>
       {mensaje && <p>{mensaje}</p>}
     </div>
   );
