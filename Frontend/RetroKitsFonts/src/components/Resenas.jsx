@@ -55,7 +55,6 @@ const Resenas = ({ productId, token }) => {
         ]);
         setTotalResenas((prevTotal) => prevTotal + 1);
         setResena(""); // Limpiar la caja de texto
-        alert(data.message || "Reseña enviada con éxito.");
       } else {
         setResena(""); // Limpiar la caja de texto
         console.error("Error al enviar la reseña");
@@ -86,9 +85,9 @@ const Resenas = ({ productId, token }) => {
         <ul>
           {resenas.map((r, index) => (
             <li key={index}>
-              <p><strong>Usuario:</strong> {token}</p>
-              <p>{r.Comment}</p>
-              <p><em>{new Date(r.DateCreated).toLocaleString()}</em></p>
+              <p><strong>Usuario:</strong> {r.name}</p>
+              <p>{r.comment}</p>
+              <p><em>{new Date(r.dateCreated).toLocaleString()}</em></p>
             </li>
           ))}
         </ul>
