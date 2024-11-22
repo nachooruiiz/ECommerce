@@ -69,7 +69,7 @@ const Resenas = ({ productId, token }) => {
 
   return (
     <div>
-      <h2>Deja tu reseña</h2>
+      <h1>Deja tu reseña</h1>
       <textarea
         value={resena}
         onChange={(e) => setResena(e.target.value)}
@@ -79,7 +79,7 @@ const Resenas = ({ productId, token }) => {
       ></textarea>
       <br />
       <button onClick={enviarResena}>Enviar Reseña</button>
-      <p>Total de Reseñas: {totalResenas}</p>
+
 
       <h3>Reseñas</h3>
       {resenas.length > 0 ? (

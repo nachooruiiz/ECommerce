@@ -63,6 +63,7 @@ public class ReviewController : Controller
             .Where(r => r.ProductId == productId)
             .Select(r => new
             {
+                r.User.Name,
                 r.Comment,
                 r.DateCreated,
             })

@@ -142,39 +142,7 @@ export default function DetalleDeProducto() {
       <div className="contenedor-reviews-relacionados">
         {/* Sección de reseñas */}
         <div className="reviews">
-          <h1>Reseñas</h1>
-          {/* Aquí podrías mapear reseñas reales si las obtienes del backend */}
-          <h3>Carlos Rueda</h3>
-          <p>⭐⭐⭐⭐⭐</p>
-          <p>
-            Esta camiseta retro del CD Málaga es simplemente espectacular. La calidad
-            del tejido y los detalles vintage la hacen única. Me encanta cómo
-            representa la historia del equipo, y cada vez que la uso me siento parte
-            de esa gran tradición. Además, es súper cómoda, perfecta tanto para
-            llevarla al estadio como para el día a día. ¡Una joya para cualquier
-            malaguista!
-          </p>
-
-          <h3>Lucía Salas</h3>
-          <p>⭐⭐⭐⭐⭐</p>
-          <p>
-            "Compré la camiseta retro del CD Málaga para regalarla a mi hermano, que
-            es fanático del equipo, ¡y no podría estar más feliz con la compra! Los
-            detalles son increíbles, desde el escudo hasta el diseño de las mangas.
-            El estilo vintage le da un toque especial y auténtico. Mi hermano está
-            encantado, y yo estoy pensando en comprarme una para mí. ¡Totalmente
-            recomendada!"
-          </p>
-
-          <h3>Manuel Ortega</h3>
-          <p>⭐⭐⭐⭐⭐</p>
-          <p>
-            "Esta camiseta retro del CD Málaga es lo mejor que he añadido a mi
-            colección. El diseño clásico me recuerda a los buenos tiempos del club, y
-            cada vez que la llevo puesta, los comentarios positivos no faltan. Es
-            ideal para cualquier fan que quiera llevar la historia del Málaga CF
-            consigo. La recomiendo 100%, tanto por su estilo como por su calidad."
-          </p>
+        <Resenas productId={product.id} token={token} />
         </div>
 
         {/* Sección de productos relacionados */}
@@ -225,7 +193,7 @@ export default function DetalleDeProducto() {
         </div>
 
       </div>
-      <Resenas productId={product.id} token={token} />
+      
     </>
   );
 }

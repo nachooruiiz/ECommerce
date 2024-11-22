@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./../css/Carrito.css";
+import { Link } from "react-router-dom";
 
 const Carrito = () => {
   const [carrito, setCarrito] = useState([]);
   const [mensaje, setMensaje] = useState("");
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   const cargarCarrito = async () => {
-    
     try {
       const response = await fetch("https://localhost:7261/api/Cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setCarrito(data.items);
@@ -27,6 +27,11 @@ const Carrito = () => {
   };
 
   const actualizarCantidad = async (productId, nuevaCantidad) => {
+    if (nuevaCantidad <= 0) {
+      alert("La cantidad debe ser mayor a 0.");
+      return;
+    }
+  
     try {
       const response = await fetch(
         "https://localhost:7261/api/Cart/UpdateQuantity",
@@ -39,10 +44,12 @@ const Carrito = () => {
           body: JSON.stringify({ productId, quantity: nuevaCantidad }),
         }
       );
-
+  
       if (response.ok) {
-        setMensaje("Cantidad actualizada con éxito.");
-        cargarCarrito();
+        const updatedCarrito = carrito.map((item) =>
+          item.productId === productId ? { ...item, quantity: nuevaCantidad } : item
+        );
+        setCarrito(updatedCarrito); // Actualiza el estado directamente
       } else {
         const errorData = await response.json();
         setMensaje(errorData.message || "Error al actualizar la cantidad.");
@@ -52,6 +59,7 @@ const Carrito = () => {
       setMensaje("No se pudo conectar con el servidor.");
     }
   };
+  
 
   const eliminarDelCarrito = async (productId) => {
     try {
@@ -64,7 +72,7 @@ const Carrito = () => {
           },
         }
       );
-      
+
       if (response.ok) {
         setMensaje("Producto eliminado del carrito con éxito.");
         cargarCarrito();
@@ -103,40 +111,92 @@ const Carrito = () => {
     cargarCarrito();
   }, []);
 
+  const calcularTotalProductos = () => {
+    return carrito.reduce((total, item) => total + (parseInt(item.quantity) || 0), 0);
+  };
+  
+
+  const calcularSubtotal = () => {
+    return carrito.reduce((total, item) => {
+      const price = parseFloat(item.price) || 0; // Asegurarse de que sea un número
+      const quantity = parseInt(item.quantity) || 0; // Asegurarse de que sea un número
+      return total + price * quantity;
+    }, 0);
+  };
+  
   return (
     <div className="carrito-layout">
-      <h2>Carrito de Compras</h2>
-
-      {carrito.length > 0 ? (
-        <ul className="productos-carrito">
-          {carrito.map((item) => (
-            <li key={item.productId} className="producto">
-              <p>
-                <img src={`https://localhost:7261${item.imageUrl}`} className="imagen-producto-carrito"></img>
-                <strong className="descripcion-pedido">{item.name}</strong> - {item.price}€ x {item.quantity}
-              </p>
-              <input
-                type="number"
-                min="1"
-                max={item.stock}
-                defaultValue={item.quantity}
-                onBlur={(e) =>
-                  actualizarCantidad(item.productId, parseInt(e.target.value))
-                }
+      <div className="productos-carrito">
+        <h2>Carrito de Compras</h2>
+        {carrito.length > 0 ? (
+          carrito.map((item) => (
+            <div key={item.productId} className="producto">
+              <img
+                src={`https://localhost:7261${item.imageUrl}`}
+                className="imagen-producto-carrito"
+                alt={item.name}
               />
-              <button onClick={() => eliminarDelCarrito(item.productId)} className="eliminar-btn">
-                Eliminar
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No tienes productos en tu carrito.</p>
-      )}
+              
+              <div>
+              <Link
+                to={`/Catalogo/${item.productId}`} // Ruta dinámica al producto
+                className="descripcion-pedido"
+              >
+                <p className="nombre-producto">
+                  {item.name} - {item.price}€
+                </p>
+                </Link>
+                <p>
+                  Talla: {item.size} | Cantidad: {item.quantity}
+                </p>
+                <div className="counter">
+    <button
+      onClick={() =>
+        actualizarCantidad(item.productId, Math.max(item.quantity - 1, 1))
+      }
+      disabled={item.quantity <= 1}
+    >
+      -
+    </button>
 
-      <button onClick={vaciarCarrito} className="eliminar-btn">
-        Vaciar Carrito
-      </button>
+    <input
+      type="number"
+      min="1"
+      max={item.stock}
+      value={item.quantity}
+      readOnly
+    />
+
+    <button
+      onClick={() =>
+        actualizarCantidad(item.productId, Math.min(item.quantity + 1, item.stock))
+      }
+      disabled={item.quantity >= item.stock}
+    >
+      +
+    </button>
+  </div>
+                <button
+                  onClick={() => eliminarDelCarrito(item.productId)}
+                  className="eliminar-btn"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No tienes productos en tu carrito.</p>
+        )}
+      </div>
+      <div className="tramitar-pedido">
+      <h2>Subtotal ({calcularTotalProductos()} productos)</h2>
+        <p>{calcularSubtotal().toFixed(2)}€</p>
+        <button className="ver-catalogo-btn">Tramitar Pedido</button>
+        <button onClick={vaciarCarrito} className="eliminar-btn">
+          Vaciar Carrito
+        </button>
+      </div>
       {mensaje && <p>{mensaje}</p>}
     </div>
   );
