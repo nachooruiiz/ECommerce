@@ -1,87 +1,54 @@
-/* Estructura principal del carrito */
-.contenido-carrito {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Diseño de la disposición del carrito */
 .carrito-layout {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  padding: 20px;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Sección de productos */
 .productos-carrito {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: 65%;
 }
 
 .producto {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  padding: 10px 0;
+  padding-bottom: 10px;
 }
 
 .imagen-producto-carrito {
-  width: 150px;
+  width: 100px;
   height: auto;
-  border-radius: 7px;
-}
-
-.descripcion-pedido {
-  flex-grow: 1;
-  margin-left: 20px;
+  border-radius: 5px;
 }
 
 .nombre-producto {
   font-size: 18px;
-  margin-bottom: 10px;
+  font-weight: bold;
+  color: black;
 }
 
-.talla, .precio {
-  font-size: 16px;
-}
-
-.counter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.counter button {
-  background-color: white;
-  border: 1px solid black;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  border-radius: 7px;
-}
-
-.counter span {
-  font-size: 16px;
-}
-
-/* Sección de tramitar pedido (subtotal) */
 .tramitar-pedido {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border-left: 1px solid #ddd;
-  padding-left: 20px;
+  width: 30%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.tramitar-pedido h1 {
+.tramitar-pedido h2 {
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+.tramitar-pedido p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .ver-catalogo-btn {
@@ -92,13 +59,29 @@
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
-  width: 75%;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .ver-catalogo-btn:hover {
   background-color: #e0a800;
 }
+
+.eliminar-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.eliminar-btn:hover {
+  background-color: #d32f2f;
+}
+
 .counter {
   display: flex;
   align-items: center;
@@ -106,29 +89,30 @@
 }
 
 .counter button {
-  background-color: white;
-  border: 1px solid black;
-  width: 30px;
-  height: 30px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
   cursor: pointer;
-}
-
-.counter span {
+  border-radius: 5px;
   font-size: 16px;
 }
 
-.eliminar-btn {
-  margin-top: 10px;
-  background-color: #f44336; /* Rojo */
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
+.counter button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.counter input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-.eliminar-btn:hover {
-  background-color: #d32f2f;
+.reviews h1{
+  font-size: 1.8em;
+  color: #444;
+  margin-bottom: 20%;
 }
-
+.reviews{
+  margin-top: 4%;
+}
