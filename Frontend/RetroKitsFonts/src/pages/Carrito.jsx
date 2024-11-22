@@ -9,6 +9,14 @@ const Carrito = () => {
 
   const cargarCarrito = async () => {
     try {
+      // if(token == null){
+      //   const carrito_local = JSON.parse(localStorage.getItem("carrito"))
+      //   setCarrito(carrito_local)
+      //   console.log(carrito_local)
+      //   const response = await fetch(`https://localhost:7261/api/Product/mostrarproduct?id_product=${carrito_local}`)
+       
+      // }
+
       const response = await fetch("https://localhost:7261/api/Cart", {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -25,6 +25,10 @@
             [HttpGet]
             public IActionResult GetCart()
             {
+                if(User.FindFirstValue("id") == null)
+                {
+                    return Ok();
+                }
                 // Obtener el ID del usuario desde el token
                 var userId = int.Parse(User.FindFirstValue("id"));
 
@@ -58,6 +62,16 @@
             [HttpPost("AddItem")]
             public IActionResult AddItem([FromBody] CartItemDto itemDto)
             {
+                if (User.FindFirstValue("id") == null)
+                {
+                    var carritoLocal = new[]
+                    {
+                        itemDto.ProductId,
+                        itemDto.Quantity,
+                    };
+                    return Ok("Producto agregado al carrito.");
+                }
+
                 var userId = int.Parse(User.FindFirstValue("id"));
 
                 // Buscar el producto en la base de datos
@@ -187,6 +201,43 @@
                 _context.SaveChanges();
 
                 return Ok("Carrito vaciado con éxito.");
+            }
+
+            // Sincronizar carritos del local storage y usuario
+            [HttpPost("Synchronize")]
+            [Authorize]
+            public async Task<IActionResult> SynchronizeCart([FromBody] List<CartItemDto> items)
+            {
+                var userId = int.Parse(User.FindFirstValue("id"));
+
+                if (userId == null)
+                {
+                    return Unauthorized(new { message = "Usuario no autorizado." });
+                }
+
+                foreach (var item in items)
+                {
+                    var existingItem = await _context.CartItems
+                        .FirstOrDefaultAsync(ci => ci.ProductId == item.ProductId && ci.UserId == userId);
+
+                    if (existingItem != null)
+                    {
+                        existingItem.Quantity += item.Quantity;
+                    }
+                    else
+                    {
+                        var newItem = new CartItem
+                        {
+                            UserId = userId,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity
+                        };
+                        _context.CartItems.Add(newItem);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Carrito sincronizado con éxito." });
             }
         }
 
