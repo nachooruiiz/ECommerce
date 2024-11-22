@@ -121,13 +121,14 @@
             {
                 var userId = int.Parse(User.FindFirstValue("id"));
 
-                var cart = _context.Carts.FirstOrDefault(c => c.UserId == userId);
+                var cart = _context.Carts.Include(c => c.Items).FirstOrDefault(c => c.UserId == userId);
+
                 if (cart == null)
                 {
                     return NotFound("No se encontró un carrito para este usuario.");
                 }
 
-                var item = cart.Items.FirstOrDefault(i => i.ProductId == itemDto.ProductId);
+                var item = cart.Items.SingleOrDefault(i => i.ProductId == itemDto.ProductId);
                 if (item == null)
                 {
                     return NotFound("El producto no está en el carrito.");
@@ -163,6 +164,29 @@
                 _context.SaveChanges();
 
                 return Ok("Producto eliminado del carrito.");
+            }
+
+            // Vaciar el carrito
+            [HttpDelete("ClearCart")]
+            public IActionResult ClearCart()
+            {
+                var userId = int.Parse(User.FindFirstValue("id"));
+
+                // Buscar el carrito del usuario
+                var cart = _context.Carts
+                    .Include(c => c.Items)
+                    .FirstOrDefault(c => c.UserId == userId);
+
+                if (cart == null)
+                {
+                    return NotFound("No se encontró un carrito para este usuario.");
+                }
+
+                // Eliminar todos los elementos del carrito
+                cart.Items.Clear();
+                _context.SaveChanges();
+
+                return Ok("Carrito vaciado con éxito.");
             }
         }
 
