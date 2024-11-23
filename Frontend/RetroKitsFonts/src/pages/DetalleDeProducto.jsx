@@ -17,34 +17,8 @@ export default function DetalleDeProducto() {
 
   // Función para añadir los productos al carrito
   const agregarAlCarrito = async (productId, cantidad) => {
-
+    
     try {
-      if (token == null) {
-        let carritoActual = [];
-        // Prueba si hay algún carrito guardado, si no lo crea desde 0
-        try {
-          const carritoGuardado = localStorage.getItem("carrito");
-          carritoActual = carritoGuardado ? JSON.parse(carritoGuardado) : [];
-        } catch (error) {
-          console.error("Error al analizar los datos del carrito desde localStorage:", error);
-          carritoActual = [];
-        }
-
-        // Verificar si el producto ya existe en el carrito
-        const productoExistente = carritoActual.find(item => item.productId === productId);
-
-        if (productoExistente) {
-          // Si el producto ya existe, sumar la cantidad
-          productoExistente.quantity += cantidad;
-        } else {
-          // Si no existe, agregarlo como un nuevo producto
-          carritoActual.push({ productId, quantity: cantidad });
-        }
-
-        // Guardar el carrito actualizado en localStorage
-        localStorage.setItem("carrito", JSON.stringify(carritoActual));
-      }
-
       const response = await fetch("https://localhost:7261/api/Cart/AddItem", {
         method: "POST",
         headers: {
@@ -53,7 +27,7 @@ export default function DetalleDeProducto() {
         },
         body: JSON.stringify({ productId, quantity: cantidad }),
       });
-      
+      console.log(response)
       if (response.ok) {
         setMensaje("Producto añadido al carrito con éxito.");
       } else {
@@ -142,7 +116,7 @@ export default function DetalleDeProducto() {
           />
 
           <div className="botones-detalle">
-            <button
+            <button 
               className="boton-comprar"
               onClick={() =>
                 agregarAlCarrito(
@@ -168,7 +142,7 @@ export default function DetalleDeProducto() {
       <div className="contenedor-reviews-relacionados">
         {/* Sección de reseñas */}
         <div className="reviews">
-          <Resenas productId={product.id} token={token} />
+        <Resenas productId={product.id} token={token} />
         </div>
 
         {/* Sección de productos relacionados */}
@@ -219,7 +193,7 @@ export default function DetalleDeProducto() {
         </div>
 
       </div>
-
+      
     </>
   );
 }
