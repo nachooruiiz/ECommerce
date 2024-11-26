@@ -39,9 +39,24 @@ public class MyDbContext : DbContext
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // Relaciones del carrito
+
+        // Relación Usuario-Carrito
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Cart)
+            .WithOne(c => c.User)
+            .HasForeignKey<Cart>(c => c.UserId);
+
+        // Relación Carrito-CartItem
         modelBuilder.Entity<Cart>()
             .HasMany(c => c.Items)
             .WithOne(i => i.Cart)
             .HasForeignKey(i => i.CartId);
+
+        // Relación Producto-CartItem
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.CartItems)
+            .WithOne(ci => ci.Product)
+            .HasForeignKey(ci => ci.ProductId);
     }
 }

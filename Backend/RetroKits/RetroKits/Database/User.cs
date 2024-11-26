@@ -13,4 +13,5 @@ public class User
     public string Email { get; set; }
     public string Rol { get; set; }
     public ICollection<Review> Reviews { get; set; }
+    public Cart Cart { get; set; }
 }

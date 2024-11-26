@@ -84,6 +84,7 @@
             [HttpPost("AddItem")]
             public IActionResult AddItem([FromBody] CartItemDto itemDto)
             {
+
                 // Si el usuario no está registrado se crea un carrito local con el id y la cantidad de producto
                 if (User.FindFirstValue("id") == null)
                 {
