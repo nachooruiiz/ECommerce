@@ -9,7 +9,6 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f4f4f4;
 }
 
 .carousel {
@@ -107,8 +106,8 @@ body {
 
 /* Línea divisora */
 hr {
-  width: 100%;
   margin: 0;
+  margin-right: 10%;
 }
 
 /* Responsividad */

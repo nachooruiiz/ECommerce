@@ -49,6 +49,7 @@ public class Program
         builder.Services.AddScoped<ProductRepository>();
         builder.Services.AddScoped<SmartSearchService>();
         builder.Services.AddScoped<ReviewController>();
+        builder.Services.AddScoped<PedidoController>();
 
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>

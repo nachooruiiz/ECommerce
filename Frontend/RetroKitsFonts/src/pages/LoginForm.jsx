@@ -1,7 +1,8 @@
 import './../css/FormStyle.css';
 import './../css/estilosReusables.css'
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../context/CartContext';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const [succes, setSucces] = useState('');
   const navigate = useNavigate();
+  const cart = useContext(CartContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,12 +20,37 @@ export default function LoginForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      console.log(response)
+      
       if (response.ok) {
         const token = await response.text();
         localStorage.setItem('token', token);
-        setSucces(`Bienvenido ${email}`);
-        navigate("/"); 
+
+        console.log(cart)
+        if (cart == null){
+          console.log("Estoy dentro del if")
+          setSucces(`Bienvenido ${email}`);
+          navigate("/");
+        }else{
+          console.log("Ahora mismo estoy dentro del else")
+
+          const carritoParaSincronizar = cart.carrito.map(producto => ({
+            ProductId: producto.productId, 
+            Quantity: producto.quantity
+          }));
+          console.log(carritoParaSincronizar)
+
+          await fetch('https://localhost:7261/api/Cart/SyncCart',{
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(carritoParaSincronizar)
+          })
+
+          setSucces(`Bienvenido ${email}`);
+          navigate("/");
+        }
       } else if (response.ok == false){
         setError("Usuario o contraseña incorrectos.");
       }

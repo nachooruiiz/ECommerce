@@ -96,13 +96,11 @@ header {
     height: 60%; /* Asegúrate de que tome toda la altura disponible */
 }
 
-.svg3 {
-    display: flex;          /* Hace que el contenedor <Link> se comporte como un flex container */
-    align-items: flex-end;  /* Alinea el icono SVG en la parte inferior del contenedor */
-    height: 100%;           /* Asegura que el enlace ocupe toda la altura del contenedor padre */
+
+.nav-icons-header svg{
+    width: 24px;
+    height: 24px;
 }
-
-
 
 
 

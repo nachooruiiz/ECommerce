@@ -83,7 +83,6 @@
 .reviews h1 {
   font-size: 1.8em;
   color: #444;
-  margin-bottom: 20px;
 }
 
 .reviews h3 {
@@ -187,9 +186,115 @@
 
 .desplegable-talla{
   font-size: 24px;
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 }
 
 .botones-detalle{
   margin-bottom: 5%;
+}
+.cantidad-producto{
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 10%;
+  height: 30px;
+}
+
+.caja-reviews{
+  padding: 5px; 
+  font-size: 14px; 
+  border: 1px solid #ddd; 
+  border-radius: 5px;
+}
+
+.boton-reviews{
+  background-color: #FFD700;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+  width: 45%;
+  margin-bottom: 4%;
+}
+
+.boton-reviews:hover{
+  background-color: #FFA500;
+}
+
+.reviews {
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+
+.reviews textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input-estrellas {
+  width: 50px;
+  padding: 5px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.lista-reviews {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.review-nombre {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.review-estrellas {
+  color: #FFD700; /* Color de las estrellas */
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.review-comentario {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+
+.calificacion-estrellas {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.estrella {
+  font-size: 2em;
+  color: #ccc; /* Color de las estrellas no seleccionadas */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.estrella.seleccionada {
+  color: #FFD700; /* Color de las estrellas seleccionadas */
+}
+
+.unidad-producto{
+  display: flex;
+  gap: 15px;
 }

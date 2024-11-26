@@ -4,6 +4,7 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 420px;
 }
 
 .productos-carrito {
@@ -38,6 +39,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   text-align: center;
+  height: 240px;
 }
 
 .tramitar-pedido h2 {
@@ -51,7 +53,7 @@
   margin-bottom: 20px;
 }
 
-.ver-catalogo-btn {
+.ver-carrito-btn {
   background-color: #ffc107;
   border: none;
   color: white;
@@ -109,7 +111,7 @@
   border-radius: 5px;
 }
 .reviews h1{
-  font-size: 1.8em;
+  font-size: 28.8px;
   color: #444;
   margin-bottom: 20%;
 }

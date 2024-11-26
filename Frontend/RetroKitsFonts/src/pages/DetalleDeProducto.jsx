@@ -1,44 +1,19 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import "../css/DetalleDeProducto.css";
-import Resenas from "../components/Resenas";
-//import { useToken } from "../context/TokenContext";
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import '../css/DetalleDeProducto.css';
+import Resenas from '../components/Resenas';
+import { CartContext } from '../context/CartContext';
 
 export default function DetalleDeProducto() {
   const { id } = useParams(); // Obtén el ID del producto desde la URL
   const [product, setProduct] = useState(null);
-  const [mensaje, setMensaje] = useState("");
-  const [error, setError] = useState("");
-  //const { token } = useToken();
-  const token = localStorage.getItem("token")
+  const [mensaje, setMensaje] = useState('');
+  const [error, setError] = useState('');
+  const { agregarAlCarrito } = useContext(CartContext); // Accede a la función para agregar al carrito desde el contexto
 
   // Estado para productos relacionados (opcional)
   const [relatedProducts, setRelatedProducts] = useState([]);
-
-  // Función para añadir los productos al carrito
-  const agregarAlCarrito = async (productId, cantidad) => {
-    
-    try {
-      const response = await fetch("https://localhost:7261/api/Cart/AddItem", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId, quantity: cantidad }),
-      });
-      console.log(response)
-      if (response.ok) {
-        setMensaje("Producto añadido al carrito con éxito.");
-      } else {
-        const data = await response.json();
-        setMensaje(data.message || "Error al añadir producto al carrito.");
-      }
-    } catch (error) {
-      console.log(error)
-      setMensaje("Error al conectar con el servidor.");
-    }
-  };
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -46,7 +21,7 @@ export default function DetalleDeProducto() {
         const url = `https://localhost:7261/api/Product/mostrarproduct?id_product=${id}`;
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error("Error al obtener el producto");
+          throw new Error('Error al obtener el producto');
         }
         const data = await response.json();
         setProduct(data);
@@ -95,9 +70,11 @@ export default function DetalleDeProducto() {
           <p className="detalle-producto-stock">Stock: {product.stock}</p>
 
           <div className="desplegable-talla">
-            <label for="tallas">Talla : </label>
-            <select id="tallas" name="tallas" >
-              <option value="" disabled selected>Elige una opción</option>
+            <label htmlFor="tallas">Talla : </label>
+            <select id="tallas" name="tallas">
+              <option value="" disabled defaultValue>
+                Elige una opción
+              </option>
               <option value="XS">XS (Extra Small)</option>
               <option value="S">S (Small)</option>
               <option value="M">M (Medium)</option>
@@ -107,28 +84,50 @@ export default function DetalleDeProducto() {
             </select>
           </div>
 
+          <div className="unidad-producto">
+          <h2 className="unidades">Unidades :  </h2>
           <input
+            className="cantidad-producto"
             type="number"
             min="1"
             max={product.stock}
             defaultValue="1"
             id="cantidad"
           />
+          </div>
 
           <div className="botones-detalle">
-            <button 
+            <button
               className="boton-comprar"
-              onClick={() =>
+              onClick={() => {
+                const cantidad = parseInt(
+                  document.getElementById('cantidad').value
+                );
+                const talla = document.getElementById('tallas').value;
+
+                if (!talla) {
+                  setMensaje('Por favor, selecciona una talla.');
+                  return;
+                }
+
                 agregarAlCarrito(
-                  product.id,
-                  parseInt(document.getElementById("cantidad").value)
-                )
-              }
+                  {
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    imageUrl: product.imageUrl,
+                    size: talla,
+                    stock: product.stock,
+                  },
+                  cantidad
+                );
+                setMensaje('Producto añadido al carrito con éxito.');
+              }}
             >
               Añadir al carrito
             </button>
             <button className="boton-comprar">Comprar ya</button>
-            <p>{mensaje}</p>
+            {mensaje && <p>{mensaje}</p>}
           </div>
 
           <h2>Historia</h2>
@@ -148,24 +147,23 @@ export default function DetalleDeProducto() {
         {/* Sección de productos relacionados */}
         <div className="productos-relacionados">
           <h1>Productos relacionados</h1>
-          <Link to="./../">
-            <div className="imagenes-relacionadas-container">
-              {relatedProducts.length > 0 ? (
-                relatedProducts.map((relatedProduct) => (
-                  <Link
-                    to={`/Catalogo/${relatedProduct.id}`}
-                    key={relatedProduct.id}
-                  >
-                    <img
-                      className="imagenes-relacionadas"
-                      src={relatedProduct.imageUrl}
-                      alt={relatedProduct.name}
-                    />
-                  </Link>
-                ))
-              ) : (
-                // Si no hay productos relacionados, puedes mostrar algunos por defecto
-                <>
+          <div className="imagenes-relacionadas-container">
+            {relatedProducts.length > 0 ? (
+              relatedProducts.map((relatedProduct) => (
+                <Link
+                  to={`/Catalogo/${relatedProduct.id}`}
+                  key={relatedProduct.id}
+                >
+                  <img
+                    className="imagenes-relacionadas"
+                    src={`https://localhost:7261${relatedProduct.imageUrl}`}
+                    alt={relatedProduct.name}
+                  />
+                </Link>
+              ))
+            ) : (
+              // Si no hay productos relacionados, puedes mostrar algunos por defecto o un mensaje
+              <>
                   <img
                     className="imagenes-relacionadas"
                     src="/Imagenes/2.jpg"
@@ -187,13 +185,10 @@ export default function DetalleDeProducto() {
                     alt="Producto relacionado 4"
                   />
                 </>
-              )}
-            </div>
-          </Link>
+            )}
+          </div>
         </div>
-
       </div>
-      
     </>
   );
 }

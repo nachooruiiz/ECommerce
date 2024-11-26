@@ -11,7 +11,7 @@ h2 {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
@@ -55,20 +55,35 @@ h1 {
 }
 
 .search-input {
+  border: none;
+  margin-right: 5%;
+  padding: 20px;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1em;
+}
+
+.search-input:focus{
+  border: none;
+  outline: none;
+}
+
+.busqueda{
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 7px;
+  font-size: 1rem;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 4%;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
 }
+
 .sort-select1 {
   width: 300px;
   padding: 10px;
   border: none;
-  font-size: 1em;
+  font-size: 1rem;
   margin-left: 15%;
 }
 .sort-select2 {
@@ -76,7 +91,7 @@ h1 {
   padding: 10px;
   border: none;
   margin-right: 15%;
-  font-size: 1em;
+  font-size: 1rem;
 }
 
 
@@ -85,11 +100,6 @@ h1 {
   font-size: 10px;
 }
 
-.catalogo-image{
-  width: 100% ;
-  height: 150px;
-
-}
 
 .order-container{
   display: flex;
@@ -108,4 +118,14 @@ h1 {
     color: #f3f3f3;
     width: 8%;
     transition: background-color 0.3s ease;
+}
+
+.buscar{
+  background-color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 7px;
+}
+.buscar:hover{
+  background-color: #ddd;
 }

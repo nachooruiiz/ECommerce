@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 const Resenas = ({ productId, token }) => {
   const [resena, setResena] = useState("");
+  const [estrellas, setEstrellas] = useState(0);
   const [resenas, setResenas] = useState([]);
   const [totalResenas, setTotalResenas] = useState(0);
 
-  // Cargar las reseñas al montar el componente
   useEffect(() => {
     const fetchResenas = async () => {
       try {
@@ -23,12 +23,11 @@ const Resenas = ({ productId, token }) => {
     };
 
     fetchResenas();
-  }, [productId]); // Dependencia de productId para actualizar las reseñas cuando cambie
+  }, [productId]);
 
-  // Enviar una nueva reseña
   const enviarResena = async () => {
-    if (!resena.trim()) {
-      alert("Por favor, escribe una reseña.");
+    if (!resena.trim() || estrellas < 1) {
+      alert("Por favor, escribe una reseña y elige una calificación.");
       return;
     }
 
@@ -37,26 +36,26 @@ const Resenas = ({ productId, token }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization:`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           Comment: resena,
-          productId: productId,
-          DateCreated: new Date() 
+          Rating: estrellas,
+          ProductId: productId,
+          DateCreated: new Date(),
         }),
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        // Añadir la nueva reseña a la lista
         setResenas((prevResenas) => [
           ...prevResenas,
-          { Comment: resena, productId, DateCreated: new Date() }
+          { name: "Usuario", comment: resena, rating: estrellas },
         ]);
         setTotalResenas((prevTotal) => prevTotal + 1);
-        setResena(""); // Limpiar la caja de texto
+        setResena("");
+        setEstrellas(0);
       } else {
-        setResena(""); // Limpiar la caja de texto
         console.error("Error al enviar la reseña");
         alert("Ocurrió un error al enviar la reseña. Inténtalo nuevamente.");
       }
@@ -66,10 +65,26 @@ const Resenas = ({ productId, token }) => {
     }
   };
 
+  const seleccionarEstrella = (indice) => {
+    setEstrellas(indice + 1); // Actualiza el número de estrellas seleccionadas
+  };
+
   return (
-    <div>
+    <div className="reviews">
       <h1>Deja tu reseña</h1>
+      <div className="calificacion-estrellas">
+        {[...Array(5)].map((_, index) => (
+          <span
+            key={index}
+            className={`estrella ${index < estrellas ? "seleccionada" : ""}`}
+            onClick={() => seleccionarEstrella(index)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
       <textarea
+        className="caja-reviews"
         value={resena}
         onChange={(e) => setResena(e.target.value)}
         rows="4"
@@ -77,17 +92,23 @@ const Resenas = ({ productId, token }) => {
         placeholder="Escribe tu reseña aquí..."
       ></textarea>
       <br />
-      <button onClick={enviarResena}>Enviar Reseña</button>
+      
+      <br />
+      <button onClick={enviarResena} className="boton-reviews">
+        Enviar Reseña
+      </button>
 
-
-      <h3>Reseñas</h3>
+      <h2>Reseñas</h2>
       {resenas.length > 0 ? (
-        <ul>
+        <ul className="lista-reviews">
           {resenas.map((r, index) => (
-            <li key={index}>
-              <p><strong>Usuario:</strong> {r.name}</p>
-              <p>{r.comment}</p>
-              <p><em>{new Date(r.dateCreated).toLocaleString()}</em></p>
+            <li key={index} className="review-item">
+              <h3 className="review-nombre">{r.name}</h3>
+              <p className="review-estrellas">
+                {"★".repeat(r.rating)}{" "}
+                {"☆".repeat(5 - r.rating)}
+              </p>
+              <p className="review-comentario">{r.comment}</p>
             </li>
           ))}
         </ul>

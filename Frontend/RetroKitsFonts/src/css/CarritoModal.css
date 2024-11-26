@@ -1,0 +1,140 @@
+/* src/components/CarritoModal.css */
+
+/* src/components/CarritoModal.css */
+
+.carrito-modal {
+  background-color: #a32b2b;
+  width: 25%; /* Ancho del 25% */
+  height: calc(100% - 170px);
+  padding: 20px;
+  overflow-y: auto;
+  position: fixed;
+  top: 170px;
+  right: 0;
+  z-index: 1000;
+  /* Sombra en el lado izquierdo */
+  box-shadow: -10px 0 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.carrito-modal::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Opcional, si deseas un fondo transparente */
+}
+
+/* Ocultar scrollbar en IE, Edge y Firefox */
+.carrito-modal {
+  -ms-overflow-style: none; /* IE y Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Asegúrate de que el contenido no se salga del modal */
+.carrito-modal-content {
+  max-height: calc(100% - 170px);
+  overflow-y: auto;
+}
+
+.carrito-modal h2 {
+  color: white;
+  margin-bottom:20px;
+  border-bottom: 1px solid white;
+  
+}
+
+.carrito-modal pa{
+  color: white;
+}
+  
+
+.carrito-modal p{
+  color: black; /* Cambiado el color del texto a negro */
+}
+
+.producto-modal {
+  display: flex; /* Organiza imagen y detalles en línea */
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  height: 200px; /* Altura relativa al carrito-modal */
+}
+
+.imagen-producto-modal {
+  height: 80%; /* La imagen ocupa el 80% de la altura de la caja del producto */
+  width: auto;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.producto-detalles {
+  flex: 1; /* Ocupa el espacio restante */
+  display: flex;
+  flex-direction: column;
+}
+
+.producto-detalles p {
+  margin: 0;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.counter button {
+  width: 30px;
+  height: 30px;
+  background-color: #a32b2b;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.counter input {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.eliminar-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.eliminar-btn:hover {
+  background-color: #e60000;
+}
+
+.subtotal-modal {
+  margin-top: 20px;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.subtotal-modal p {
+  color: white;
+}
+
+.boton-ir-carrito {
+  margin-top: 10px;
+}
+
+.ver-carrito-btn {
+  background-color: #fff;
+  color: #a32b2b;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.ver-carrito-btn:hover {
+  background-color: #f2f2f2;
+}
