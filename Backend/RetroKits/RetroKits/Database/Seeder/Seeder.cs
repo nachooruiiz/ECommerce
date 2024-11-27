@@ -10,6 +10,20 @@
 
         public void Seed()
         {
+
+            //User[] users =
+            //{
+            //    new User
+            //    {
+            //        Name = "Alonso",
+            //        Email = "alonso@gmail.com",
+            //        Password = "asd",
+            //        Rol = "Admin",
+            //        Reviews = null,
+            //        Cart = null,
+            //    },
+            //};
+
             Product[] products = new Product[]
             {
                 new Product
@@ -194,17 +208,9 @@
                 }
             };
 
-            User[] users = new User[]
-            {
-                new User
-                {
-                    Name = "Alonso",
-                    Email = "alonso@gmail.com",
-                    Password = "asd",
-                },
-            };
 
             _dbContext.Products.AddRange(products);
+            //_dbContext.Users.AddRange(users);
             _dbContext.SaveChanges();
         }
     }

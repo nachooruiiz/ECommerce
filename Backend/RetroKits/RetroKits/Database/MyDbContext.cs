@@ -58,5 +58,25 @@ public class MyDbContext : DbContext
             .HasMany(p => p.CartItems)
             .WithOne(ci => ci.Product)
             .HasForeignKey(ci => ci.ProductId);
+
+        // Relaciones del pedido
+
+        // Relación Pedido-Usuario
+        modelBuilder.Entity<Order>()
+        .HasOne(o => o.User)
+        .WithMany(u => u.Orders)
+        .HasForeignKey(o => o.UserId);
+
+        // Relación Pedido-ItemPedido
+        modelBuilder.Entity<OrderItem>()
+        .HasOne(oi => oi.Order)
+        .WithMany(o => o.Items)
+        .HasForeignKey(oi => oi.OrderId);
+
+        // Relación Producto-ItemPedido
+        modelBuilder.Entity<OrderItem>()
+        .HasOne(oi => oi.Product)
+        .WithMany(p => p.OrderItems)
+        .HasForeignKey(oi => oi.ProductId);
     }
 }

@@ -14,4 +14,5 @@ public class User
     public string Rol { get; set; }
     public ICollection<Review> Reviews { get; set; }
     public Cart Cart { get; set; }
+    public ICollection<Order> Orders { get; set; }
 }

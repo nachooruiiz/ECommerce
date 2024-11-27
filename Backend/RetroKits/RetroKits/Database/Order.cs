@@ -6,5 +6,6 @@ public class Order
     public int TotalAmount{ get; set; }
     public DateTime Date {  get; set; }
     public int UserId { get; set; }
+    public User User { get; set; }
     public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 }
