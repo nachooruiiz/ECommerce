@@ -21,4 +21,5 @@ public class UsersController : ControllerBase
     {
         return await _userRepository.GetAllAsync();
     }
+
 }

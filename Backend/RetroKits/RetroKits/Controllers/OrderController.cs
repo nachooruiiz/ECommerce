@@ -30,6 +30,20 @@ public class OrderController : Controller
 
         var orders = _context.Orders
                 .Where(c => c.UserId == user)
+                .Select(o => new
+                {
+                    OrderId = o.Id,
+                    OrderDate = o.Date,
+                    TotalAmount = o.TotalAmount,
+                    Items = o.Items.Select(oi => new
+                    {
+                        OrderId = oi.OrderId,
+                        ProductName = oi.Product.Name,
+                        ProductUrl = oi.Product.ImageUrl,
+                        Quantity = oi.Quantity,
+                        ProductPrice = oi.Price
+                    })
+                })
                 .ToList();
 
         return Ok(orders);
