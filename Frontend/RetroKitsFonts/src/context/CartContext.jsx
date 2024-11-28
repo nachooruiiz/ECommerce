@@ -1,13 +1,18 @@
 // CartContext.jsx
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { TokenContext } from './TokenContext';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [carrito, setCarrito] = useState([]);
   const [mensaje, setMensaje] = useState('');
-  const token = localStorage.getItem('token');
+  const { token } = useContext(TokenContext)
   const localCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function handleSetCarrito(newCarrito){
+    setCarrito(newCarrito)
+  }
 
   // Función para cargar el carrito desde el backend o localStorage
   const cargarCarrito = async () => {
@@ -36,13 +41,40 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    cargarCarrito();
+    if (token){
+      console.log("useEffect de cargar carrito")
+      cargarCarrito();
+    }else{
+      setCarrito([])
+    }
+    
   }, [token]);
 
   // Función para agregar al carrito
   const agregarAlCarrito = async (producto, cantidad) => {
-    // Lógica para agregar al carrito y sincronizar con el backend
-    // ...
+    try {
+      const response = await fetch("https://localhost:7261/api/Cart/AddItem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId: producto.productId, quantity: cantidad }), // Corrige esto
+      });
+  
+      if (response.ok) {
+        setMensaje("Producto añadido al carrito con éxito.");
+      } else {
+        const data = await response.json();
+        setMensaje(data.message || "Error al añadir producto al carrito.");
+      }
+    } catch (error) {
+      console.log(error);
+      setMensaje("Error al conectar con el servidor.");
+    }
+    
+
+
 
     // Actualizar el carrito localmente
     setCarrito((prevCarrito) => {
@@ -167,6 +199,7 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         carrito,
+        cargarCarrito,
         agregarAlCarrito,
         actualizarCantidad,
         eliminarDelCarrito,

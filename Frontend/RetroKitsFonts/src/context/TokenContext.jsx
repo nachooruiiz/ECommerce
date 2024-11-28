@@ -1,15 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 // Creación del contexto
-const TokenContext = createContext
+export const TokenContext = createContext()
 
-export const useToken = () => {
-    return useContext(TokenContext)
-}
+
 
 export const TokenProvider = ({ children }) => {
     
     const [token, setToken] = useState("")
+
+    function logOut(){
+        setToken(null)
+        localStorage.removeItem("token")
+    }
 
     useEffect(() => {
         const TokenGuardado = localStorage.getItem("token")
@@ -21,7 +24,7 @@ export const TokenProvider = ({ children }) => {
      }, [])
 
     return (
-        <TokenContext.Provider value = {{ token, setToken }}>
+        <TokenContext.Provider value = {{ token, setToken, logOut}}>
             {children}
         </TokenContext.Provider>
     )

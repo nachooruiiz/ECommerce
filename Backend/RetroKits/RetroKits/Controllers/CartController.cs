@@ -26,8 +26,9 @@
             [HttpGet]
             public IActionResult GetCart()
             {
+                var userId = 1;
                 // Comprobar que el usuario tiene sesión iniciada
-                if (User.FindFirstValue("id") == null)
+                if (userId == null)
                 {
                     var localCartItems = HttpContext.Request.Headers["localCart"];
                     if (string.IsNullOrEmpty(localCartItems))
@@ -52,7 +53,7 @@
                 }
 
                 // Obtener el ID del usuario desde el token
-                var userId = int.Parse(User.FindFirstValue("id"));
+                //var userId = int.Parse(User.FindFirstValue("id"));
 
                 // Buscar el carrito del usuario
                 var cart = _context.Carts

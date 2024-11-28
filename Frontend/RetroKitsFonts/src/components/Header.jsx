@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/HeaderStyles.css';
 import CarritoModal from './CarritoModal'; // Asegúrate de que la ruta es correcta
+import { TokenContext } from '../context/TokenContext';
 
 export function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const {logOut} = useContext(TokenContext)
 
   const toggleCartModal = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+  function handlelogOut(event){
+    event.stopPropagation();
+    logOut()
+    alert("sesion cerrada")
+  }
 
   return (
     <>
@@ -45,6 +53,7 @@ export function Header() {
             <div className="nav-icons-header">
               {/* Primer icono */}
               <svg
+                onClick={handlelogOut}
                 width="20"
                 height="22"
                 viewBox="0 0 20 22"

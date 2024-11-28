@@ -5,8 +5,6 @@ import App from './App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <TokenProvider> */}
       <App />
-    {/* </TokenProvider> */}
   </StrictMode>,
 )

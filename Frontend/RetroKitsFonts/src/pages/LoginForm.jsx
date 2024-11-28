@@ -3,6 +3,7 @@ import './../css/estilosReusables.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
+import { TokenContext } from '../context/TokenContext';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -10,49 +11,68 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const [succes, setSucces] = useState('');
   const navigate = useNavigate();
-  const cart = useContext(CartContext)
+  const cart = useContext(CartContext);
+  const auth = useContext(TokenContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSucces('');
+
     try {
+      // Inicia sesión
       const response = await fetch('https://localhost:7261/api/Auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      
-      if (response.ok) {
-        const token = await response.text();
-        localStorage.setItem('token', token);
 
-        console.log(cart)
-        if (cart == null){
-          console.log("Estoy dentro del if")
-          setSucces(`Bienvenido ${email}`);
-          navigate("/");
+      if (!response.ok) {
+        setError("Usuario o contraseña incorrectos.");
+        return;
+      }
+
+      const token = await response.text();
+      localStorage.setItem('token', token);
+      auth.setToken(token)
+
+      // Verifica el carrito desde el contexto
+      if (!cart || !cart.carrito || cart.carrito.length === 0) {
+        console.log("Carrito local vacío o no inicializado");
+        setSucces(`Bienvenido ${email}`);
+        localStorage.removeItem('localCart'); // Elimina el carrito local
+        navigate("/");
+      } else {
+        console.log("Sincronizando carrito...");
+
+        const carritoParaSincronizar = cart.carrito.map(producto => ({
+          ProductId: producto.productId, 
+          Quantity: producto.quantity
+        }));
+
+        const syncResponse = await fetch('https://localhost:7261/api/Cart/SyncCart', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(carritoParaSincronizar)
+        });
+        
+        
+        if (!syncResponse.ok) {
+          throw new Error("Error al sincronizar el carrito.");
+
         }else{
-          console.log("Ahora mismo estoy dentro del else")
-
-          const carritoParaSincronizar = cart.carrito.map(producto => ({
-            ProductId: producto.productId, 
-            Quantity: producto.quantity
-          }));
-          console.log(carritoParaSincronizar)
-
-          await fetch('https://localhost:7261/api/Cart/SyncCart',{
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(carritoParaSincronizar)
-          })
-
+          console.log("carrito sincronizado")
+          //cart.cargarCarrito()
+          console.log("Carrito cogido del back");
+          localStorage.removeItem('localCart'); // Elimina el carrito local después de la sincronización
           setSucces(`Bienvenido ${email}`);
           navigate("/");
         }
-      } else if (response.ok == false){
-        setError("Usuario o contraseña incorrectos.");
+
+        
       }
     } catch (error) {
       setError("Error al conectar con el servidor.");
@@ -62,9 +82,9 @@ export default function LoginForm() {
 
   return (
     <div className="containerAll">
-      <img className="imagenLogo" src="/Imagenes/Logo.png" />
+      <img className="imagenLogo" src="/Imagenes/Logo.png" alt="Logo" />
       <div className="container">
-        <h2>Iniciar Sesion</h2>
+        <h2>Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
           <div className="formInput">
             <h3>Correo Electrónico</h3>
