@@ -12,6 +12,7 @@ import "./../src/css/estilosGenerales.css";
 import Carrito from "./pages/Carrito";
 import { CartProvider } from './context/CartContext'; // Importa el CartProvider
 import { TokenProvider } from "./context/TokenContext";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             {/* Ruta dinámica para los detalles del producto */}
             <Route path="/Catalogo/:id" element={<DetalleDeProducto />} />
             <Route path="/Carrito" element={<Carrito/>}/>
+            <Route path="/Checkout" element={<Checkout/>}/>
           </Routes>
           <Footer />
         </Router>

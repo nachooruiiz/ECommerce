@@ -5,6 +5,7 @@ using RetroKits.Models;
 using RetroKits.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace RetroKits.Controllers
@@ -78,7 +79,7 @@ namespace RetroKits.Controllers
                 Price = data.Price,
                 Description = data.Description,
                 ImageUrl = data.ImageUrl,
-                Stock = data.Stock,
+                Stock = (int)data.Stock,
                 Long_description = data.Long_description,
             };
 
@@ -86,6 +87,49 @@ namespace RetroKits.Controllers
             _dbContext.SaveChanges();
 
             return Ok("Producto registrado con éxito.");
+        }
+
+        [HttpPost("UpdateProduct/{Id}")]
+        public ActionResult UpdateProduct([FromRoute] int Id, [FromBody] ProductDto data)
+        {
+            var userRole = User.FindFirstValue("role");
+            if (userRole != "Admin")
+            {
+                return BadRequest("Para poder modificar un producto tienes que ser administrador");
+            }
+
+            // 1. Verificar si el producto ya existe
+            var existingProduct = _dbContext.Products.SingleOrDefault(u => u.Id == Id);
+
+            if (existingProduct == null)
+            {
+                return Conflict("El producto no existe.");
+            }
+
+            if (data.Name != existingProduct.Name && data.Name != null)
+            {
+                existingProduct.Name = data.Name;
+            }
+            if (data.Price != existingProduct.Price && data.Price != null)
+            {
+                existingProduct.Price = data.Price;
+            }
+            if (data.Stock != existingProduct.Stock && data.Stock != null)
+            {
+                if (data.Stock < 0)
+                {
+                    return BadRequest("No se pueden añadir stock negativo");
+                }
+                existingProduct.Stock += (int)data.Stock;
+            }
+            if(data.Long_description != existingProduct.Long_description && data.Long_description != null)
+            {
+                existingProduct.Long_description = data.Long_description;
+            }
+
+            _dbContext.SaveChanges();
+
+            return Ok("Actualizando datos del producto...");
         }
     }
 }

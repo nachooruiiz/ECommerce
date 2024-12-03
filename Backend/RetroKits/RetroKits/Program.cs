@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using RetroKits.Controllers;
 using RetroKits.Database;
@@ -17,6 +18,9 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        // Con esta línea se establece el wwwroot actual que tenemos
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
         // Add services to the container.
 
@@ -33,7 +37,7 @@ public class Program
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    builder.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -80,7 +84,11 @@ public class Program
         app.UseHttpsRedirection();
 
         // Habilita el servicio de archivos estáticos
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
         app.UseRouting();
 
         if (app.Environment.IsDevelopment())

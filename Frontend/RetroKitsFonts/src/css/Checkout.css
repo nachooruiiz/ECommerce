@@ -1,0 +1,196 @@
+/* Contenedor principal de la página de checkout */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1200px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Estilo general para cada columna */
+.checkout-column {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Resumen del pedido */
+.resumen-pedido {
+  text-align: left;
+}
+
+.resumen-pedido h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.producto-checkout {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.producto-checkout:hover {
+  transform: scale(1.05);
+  background-color: #eaeaea;
+}
+
+.imagen-producto-checkout {
+  max-width: 100px;
+  height: auto;
+  border-radius: 3px;
+  margin-right: 15px;
+}
+
+.subtotal-checkout {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Datos del cliente */
+.datos-cliente {
+  text-align: left;
+}
+
+.datos-cliente h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.datos-cliente form {
+  display: grid;
+  grid-gap: 15px;
+  margin-top: 20px;
+}
+
+.datos-cliente label {
+  font-size: 1rem;
+  display: block;
+}
+
+.datos-cliente input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 7px;
+}
+
+.datos-cliente input:focus {
+  outline: none;
+  border: 2px solid #f8c716;
+}
+
+/* Botón de finalizar compra */
+.finalizar-compra-btn {
+  background-color: #f8c716;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 7px;
+  color: #f3f3f3;
+  font-size: 1.2rem;
+  width: 100%;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.finalizar-compra-btn:hover {
+  background-color: #e7a512;
+}
+.enlace-producto {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.enlace-producto:hover {
+  color: #e74c3c; /* Cambia a un color destacado en el hover */
+}
+/* Contenedor principal de la página de checkout */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Tres columnas: izquierda, centro, derecha */
+  gap: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1400px;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Estilo general para cada columna */
+.checkout-column {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Columna de datos del cliente */
+.datos-cliente {
+  text-align: left;
+}
+
+/* Columna de productos */
+.resumen-productos {
+  text-align: left;
+}
+
+.resumen-productos .producto-checkout {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.resumen-productos .producto-checkout:hover {
+  transform: scale(1.05);
+  background-color: #eaeaea;
+}
+
+.imagen-producto-checkout {
+  max-width: 100px;
+  height: auto;
+  border-radius: 3px;
+  margin-right: 15px;
+}
+
+/* Columna de subtotal y botón */
+.subtotal-column {
+  text-align: left;
+}
+
+.subtotal-column h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.subtotal-column .finalizar-compra-btn {
+  background-color: #f8c716;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 7px;
+  color: #f3f3f3;
+  font-size: 1.2rem;
+  width: 100%;
+  margin-top: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.subtotal-column .finalizar-compra-btn:hover {
+  background-color: #e7a512;
+}

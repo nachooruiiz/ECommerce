@@ -91,7 +91,7 @@ const CarritoModal = ({ isOpen, onClose }) => {
             </div>
           </>
         ) : (
-          <p>Tu carrito está vacío.</p>
+          <p className="carrito-vacio">Tu carrito está vacío.</p>
         )}
       </div>
     </div>

@@ -28,7 +28,9 @@ align-items: center;
 padding-left: 15%;
 }
 
-
+.texto2 h2 {
+  color: whitesmoke;
+}
 
 #sobreNosotrosIMG {
   width: 100%;          /* La imagen ocupará el 100% del ancho del contenedor */

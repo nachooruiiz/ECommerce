@@ -43,6 +43,11 @@
 .carrito-modal pa{
   color: white;
 }
+
+.carrito-vacio{
+  
+   color: whitesmoke !important;
+}
   
 
 .carrito-modal p{

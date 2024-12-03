@@ -15,7 +15,6 @@ export function Header() {
   function handlelogOut(event){
     event.stopPropagation();
     logOut()
-    alert("sesion cerrada")
   }
 
   return (

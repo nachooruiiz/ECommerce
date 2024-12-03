@@ -10,17 +10,20 @@ public class MyDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Review> Reviews { get; set; }
-
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
-
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+#if DEBUG
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
         optionsBuilder.UseSqlite($"DataSource={baseDir}{DATABSE_PATH}");
+#else
+        string connectionString = "Server=db10880.databaseasp.net; Database=db10880; Uid=db10880; Pwd=sH#45_eG?jR2;";
+        optionsBuilder.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
+#endif
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

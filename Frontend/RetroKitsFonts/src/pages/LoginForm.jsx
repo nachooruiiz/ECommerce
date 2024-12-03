@@ -44,7 +44,7 @@ export default function LoginForm() {
         navigate("/");
       } else {
         console.log("Sincronizando carrito...");
-
+        
         const carritoParaSincronizar = cart.carrito.map(producto => ({
           ProductId: producto.productId, 
           Quantity: producto.quantity

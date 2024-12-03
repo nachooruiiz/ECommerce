@@ -3,6 +3,7 @@ import './../css/Carrito.css';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
+
 const Carrito = () => {
   const {
     carrito,
@@ -101,7 +102,9 @@ const Carrito = () => {
       <div className="tramitar-pedido">
         <h2>Subtotal ({calcularTotalProductos()} productos)</h2>
         <p>{calcularSubtotal().toFixed(2)}€</p>
-        <button className="ver-carrito-btn">Tramitar Pedido</button>
+        <Link to={'/Checkout'}>
+        <button className="ver-carrito-btn" >Tramitar Pedido</button>
+        </Link>
         <button onClick={vaciarCarrito} className="eliminar-btn">
           Vaciar Carrito
         </button>

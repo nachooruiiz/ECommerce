@@ -19,17 +19,17 @@ public class OrderController : Controller
     [HttpGet]
     public IActionResult GetOrder()
     {
-        var user = 1;
-        //User.FindFirstValue("id")
-        if ( user == null)
+        
+       
+        if (User.FindFirstValue("id") == null)
         {
             return BadRequest("No has hecho ningún pedido todavía");
         }
 
-        //var userId = int.Parse(User.FindFirstValue("id"));
+        var userId = int.Parse(User.FindFirstValue("id"));
 
         var orders = _context.Orders
-                .Where(c => c.UserId == user)
+                .Where(c => c.UserId == userId)
                 .Select(o => new
                 {
                     OrderId = o.Id,
@@ -38,6 +38,7 @@ public class OrderController : Controller
                     Items = o.Items.Select(oi => new
                     {
                         OrderId = oi.OrderId,
+                        ProductId = oi.ProductId,
                         ProductName = oi.Product.Name,
                         ProductUrl = oi.Product.ImageUrl,
                         Quantity = oi.Quantity,
@@ -52,14 +53,14 @@ public class OrderController : Controller
     [HttpPost("AddOrder")]
     public IActionResult AddOrder([FromBody] OrderItemDto OrderDto) 
     {
-        var user = 1;
+       
         // Comprobar si el usuario tiene la sesión iniciada
-        if (user == null)
+        if (User.FindFirstValue("id") == null)
         {
            return BadRequest("Hay que tener la sesión iniciada para realizar el pedido");
         }
 
-        //var userId = int.Parse(User.FindFirstValue("id"));
+        var userId = int.Parse(User.FindFirstValue("id"));
 
         // Se comprueba que el producto existe en la base de datos
         var product = _context.Products.FirstOrDefault(p => p.Id == OrderDto.ProductId);
@@ -68,11 +69,13 @@ public class OrderController : Controller
             return NotFound("Producto no encontrado.");
         }
 
+        var productPrice = float.Parse(product.Price);
+
         var newOrder = new Order
         {
-            UserId = user,
+            UserId = userId,
             Date = DateTime.Now,
-            TotalAmount= OrderDto.TotalAmount,
+            TotalAmount = productPrice * OrderDto.Quantity,
             Items = new List<OrderItem>(),
         };
 

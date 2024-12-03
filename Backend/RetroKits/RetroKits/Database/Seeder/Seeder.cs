@@ -11,18 +11,54 @@
         public void Seed()
         {
 
-            //User[] users =
-            //{
-            //    new User
-            //    {
-            //        Name = "Alonso",
-            //        Email = "alonso@gmail.com",
-            //        Password = "asd",
-            //        Rol = "Admin",
-            //        Reviews = null,
-            //        Cart = null,
-            //    },
-            //};
+            User[] users =
+            {
+                new User
+                {
+                    Name = "Alonso",
+                    Email = "alonso@gmail.com",
+                    Password = "alonso",
+                    Rol = "Admin",
+                    Reviews = null,
+                    Cart = null,
+                },
+                new User
+                {
+                    Name = "Enqrique",
+                    Email = "enrique@gmail.com",
+                    Password = "enrique",
+                    Rol = "Admin",
+                    Reviews = null,
+                    Cart = null,
+                },
+                new User
+                {
+                    Name = "Nacho",
+                    Email = "nacho@gmail.com",
+                    Password = "nacho",
+                    Rol = "Admin",
+                    Reviews = null,
+                    Cart = null,
+                },
+                new User
+                {
+                    Name = "Miguel",
+                    Email = "miguel@gmail.com",
+                    Password = "miguel",
+                    Rol = "Admin",
+                    Reviews = null,
+                    Cart = null,
+                },
+                new User
+                {
+                    Name = "prueba",
+                    Email = "prueba@gmail.com",
+                    Password = "prueba",
+                    Rol = "user",
+                    Reviews = null,
+                    Cart = null,
+                },
+            };
 
             Product[] products = new Product[]
             {
@@ -210,7 +246,7 @@
 
 
             _dbContext.Products.AddRange(products);
-            //_dbContext.Users.AddRange(users);
+            _dbContext.Users.AddRange(users);
             _dbContext.SaveChanges();
         }
     }

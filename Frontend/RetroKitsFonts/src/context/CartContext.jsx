@@ -9,10 +9,7 @@ export const CartProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState('');
   const { token } = useContext(TokenContext)
   const localCart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  function handleSetCarrito(newCarrito){
-    setCarrito(newCarrito)
-  }
+  
 
   // Función para cargar el carrito desde el backend o localStorage
   const cargarCarrito = async () => {
@@ -59,7 +56,7 @@ export const CartProvider = ({ children }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId: producto.productId, quantity: cantidad }), // Corrige esto
+        body: JSON.stringify({ productId: producto.productId, quantity: cantidad }),
       });
   
       if (response.ok) {
@@ -74,14 +71,19 @@ export const CartProvider = ({ children }) => {
     }
     
 
-
-
     // Actualizar el carrito localmente
     setCarrito((prevCarrito) => {
       const productoExistente = prevCarrito.find(
-        (item) => item.productId === producto.productId && item.size === producto.size
+        (item) => item.productId === producto.productId //&& item.size === producto.size
       );
+      
       if (productoExistente) {
+        
+        const nuevaCantidad = productoExistente.quantity + cantidad
+        if( nuevaCantidad > producto.stock){
+          return prevCarrito
+        }
+        console.log("ahora mismo no funciona")
         return prevCarrito.map((item) =>
           item.productId === producto.productId && item.size === producto.size
             ? { ...item, quantity: item.quantity + cantidad }

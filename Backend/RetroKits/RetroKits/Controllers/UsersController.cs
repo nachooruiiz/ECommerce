@@ -27,9 +27,16 @@ public class UsersController : ControllerBase
         return await _userRepository.GetAllAsync();
     }
 
-    [HttpPut("UpdateItem/{userId}")]
+    [HttpPut("UpdateUser/{userId}")]
     public IActionResult UpdateUser([FromRoute] int userId, [FromBody] UserDto changes)
     {
+
+        var userRole = User.FindFirstValue("role");
+        if (userRole != "Admin") 
+        {
+            return BadRequest("Para poder modificar un usuario tienes que ser administrador");
+        }
+
         var existingUser = _dbContext.Users.SingleOrDefault(o => o.Id == userId);
 
         if (existingUser == null)
@@ -58,6 +65,12 @@ public class UsersController : ControllerBase
     [HttpDelete("DeleteUser")]
     public IActionResult DeleteUser()
     {
+        var userRole = User.FindFirstValue("role");
+        if (userRole != "Admin")
+        {
+            return BadRequest("Para poder modificar un usuario tienes que ser administrador");
+        }
+
         var userId = int.Parse(User.FindFirstValue("id"));
 
         var user = _dbContext.Users.FirstOrDefault(o => o.Id == userId);

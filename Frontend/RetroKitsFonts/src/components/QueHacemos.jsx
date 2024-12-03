@@ -5,7 +5,7 @@ import './../css/AboutUs.css';
 export default function QueHacemos() {
   return (
     <div className="queHacemos">
-      <div className="texto1">
+      <div className="texto2">
         <h2>Qué Hacemos</h2>
         <hr className='hr-blanco'/>
         
