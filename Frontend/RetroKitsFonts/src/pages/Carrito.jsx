@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './../css/Carrito.css';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { API_BASE_URL } from '../config';
 
 
 const Carrito = () => {
@@ -34,7 +35,7 @@ const Carrito = () => {
           carrito.map((item) => (
             <div key={`${item.productId}-${item.size}`} className="producto">
               <img
-                src={`https://localhost:7261${item.imageUrl}`}
+                src={`${API_BASE_URL}${item.imageUrl}`}
                 className="imagen-producto-carrito"
                 alt={item.name}
               />
@@ -49,14 +50,14 @@ const Carrito = () => {
                   </p>
                 </Link>
                 <p>
-                  Talla: {item.size} | Cantidad: {item.quantity}
+                  {/*Talla: {item.size} |*/} Cantidad: {item.quantity}
                 </p>
                 <div className="counter">
                   <button
                     onClick={() =>
                       actualizarCantidad(
                         item.productId,
-                        item.size,
+                        /*item.size,*/
                         Math.max(item.quantity - 1, 1)
                       )
                     }
@@ -77,7 +78,7 @@ const Carrito = () => {
                     onClick={() =>
                       actualizarCantidad(
                         item.productId,
-                        item.size,
+                        /*item.size,*/
                         Math.min(item.quantity + 1, item.stock)
                       )
                     }
@@ -87,7 +88,7 @@ const Carrito = () => {
                   </button>
                 </div>
                 <button
-                  onClick={() => eliminarDelCarrito(item.productId, item.size)}
+                  onClick={() => eliminarDelCarrito(item.productId/*, item.size*/)}
                   className="eliminar-btn"
                 >
                   Eliminar
@@ -109,7 +110,6 @@ const Carrito = () => {
           Vaciar Carrito
         </button>
       </div>
-      {mensaje && <p>{mensaje}</p>}
     </div>
   );
 };

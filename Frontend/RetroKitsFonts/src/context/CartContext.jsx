@@ -1,6 +1,7 @@
 // CartContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { TokenContext } from './TokenContext';
+import { ADD_ITEM_CART, REMOVE_ITEM_CART, SHOW_CART, UPDATE_ITEM_CART } from '../config';
 
 export const CartContext = createContext();
 
@@ -19,7 +20,7 @@ export const CartProvider = ({ children }) => {
     } else {
       // Usuario autenticado
       try {
-        const response = await fetch('https://localhost:7261/api/Cart', {
+        const response = await fetch(SHOW_CART, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -50,7 +51,7 @@ export const CartProvider = ({ children }) => {
   // Función para agregar al carrito
   const agregarAlCarrito = async (producto, cantidad) => {
     try {
-      const response = await fetch("https://localhost:7261/api/Cart/AddItem", {
+      const response = await fetch(ADD_ITEM_CART, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +97,7 @@ export const CartProvider = ({ children }) => {
   };
 
   // Función para actualizar la cantidad
-  const actualizarCantidad = async (productId, size, nuevaCantidad) => {
+  const actualizarCantidad = async (productId/*, size,*/, nuevaCantidad) => {
     if (nuevaCantidad <= 0) {
       eliminarDelCarrito(productId, size);
       return;
@@ -105,13 +106,13 @@ export const CartProvider = ({ children }) => {
     // Actualizar en el backend si es necesario
     if (token) {
       try {
-        const response = await fetch('https://localhost:7261/api/Cart/UpdateItem', {
+        const response = await fetch(UPDATE_ITEM_CART, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ productId, size, quantity: nuevaCantidad }),
+          body: JSON.stringify({ productId,/* size,*/ quantity: nuevaCantidad }),
         });
 
         if (!response.ok) {
@@ -127,7 +128,7 @@ export const CartProvider = ({ children }) => {
     // Actualizar el carrito localmente
     setCarrito((prevCarrito) =>
       prevCarrito.map((item) =>
-        item.productId === productId && item.size === size
+        item.productId === productId/* && item.size === size*/
           ? { ...item, quantity: nuevaCantidad }
           : item
       )
@@ -135,12 +136,12 @@ export const CartProvider = ({ children }) => {
   };
 
   // Función para eliminar del carrito
-  const eliminarDelCarrito = async (productId, size) => {
+  const eliminarDelCarrito = async (productId/*, size*/) => {
     // Actualizar en el backend si es necesario
     if (token) {
       try {
         const response = await fetch(
-          `https://localhost:7261/api/Cart/RemoveItem/${productId}`,
+          `${REMOVE_ITEM_CART}${productId}`,
           {
             method: 'DELETE',
             headers: {
@@ -162,7 +163,7 @@ export const CartProvider = ({ children }) => {
     // Actualizar el carrito localmente
     setCarrito((prevCarrito) =>
       prevCarrito.filter(
-        (item) => !(item.productId === productId && item.size === size)
+        (item) => !(item.productId === productId/* && item.size === size*/)
       )
     );
   };
@@ -172,7 +173,7 @@ export const CartProvider = ({ children }) => {
     // Actualizar en el backend si es necesario
     if (token) {
       try {
-        const response = await fetch('https://localhost:7261/api/Cart/ClearCart', {
+        const response = await fetch(CLEAR_CART, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,

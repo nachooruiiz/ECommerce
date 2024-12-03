@@ -2,6 +2,7 @@ import './../css/FormStyle.css'
 import './../css/estilosReusables.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { REGISTER } from '../config';
 
 export default function RegisterForm() {
     const [name, setName] = useState('');
@@ -31,7 +32,7 @@ export default function RegisterForm() {
         }
 
         try {
-            const response = await fetch('https://localhost:7261/api/Auth/register', {
+            const response = await fetch(REGISTER, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password, address, birthdate })

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Catalogo.css";
+import { API_BASE_URL, SEARCH_PRODUCTS } from "../config";
 
 export default function Catalogo() {
   const [products, setProducts] = useState([]);
@@ -14,9 +15,7 @@ export default function Catalogo() {
   // Llamada para obtener productos filtrados con paginación
   const fetchProducts = async (query, sortOption, page, pageSize) => {
     try {
-      const url = `https://localhost:7261/api/SmartSearch?query=${query}&option=${sortOption}&page=${page}&pageSize=${pageSize}`;
-
-      const response = await fetch(url);
+      const response = await fetch(`${SEARCH_PRODUCTS}?query=${query}&option=${sortOption}&page=${page}&pageSize=${pageSize}`);
       if (!response.ok) {
         throw new Error("Error al obtener productos");
       }
@@ -125,7 +124,7 @@ export default function Catalogo() {
           <Link to={`/Catalogo/${product.id}`} key={product.id}>
             <div key={index} className="product-item">
               <img
-                src={`https://localhost:7261${product.imageUrl}`}
+                src={`${API_BASE_URL}${product.imageUrl}`}
                 alt={product.name}
                 className="product-image"
               />

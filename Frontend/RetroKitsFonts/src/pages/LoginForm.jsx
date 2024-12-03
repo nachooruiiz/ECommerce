@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { TokenContext } from '../context/TokenContext';
+import { LOGIN, SYNC_CART } from '../config.js'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -21,12 +22,13 @@ export default function LoginForm() {
 
     try {
       // Inicia sesión
-      const response = await fetch('https://localhost:7261/api/Auth/login', {
+      const response = await fetch(LOGIN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
 
+        console.log(response)
       if (!response.ok) {
         setError("Usuario o contraseña incorrectos.");
         return;
@@ -50,7 +52,7 @@ export default function LoginForm() {
           Quantity: producto.quantity
         }));
 
-        const syncResponse = await fetch('https://localhost:7261/api/Cart/SyncCart', {
+        const syncResponse = await fetch(SYNC_CART, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

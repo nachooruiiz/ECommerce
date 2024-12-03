@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import '../css/DetalleDeProducto.css';
 import Resenas from '../components/Resenas';
 import { CartContext } from '../context/CartContext';
+import { API_BASE_URL, SHOW_ONE_PRODUCT } from '../config';
 
 export default function DetalleDeProducto() {
   const { id } = useParams(); // Obtén el ID del producto desde la URL
@@ -18,7 +19,7 @@ export default function DetalleDeProducto() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const url = `https://localhost:7261/api/Product/mostrarproduct?id_product=${id}`;
+        const url = `${SHOW_ONE_PRODUCT}?id_product=${id}`;
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Error al obtener el producto');
@@ -57,7 +58,7 @@ export default function DetalleDeProducto() {
           {/* Imagen del producto */}
           <div className="detalle-producto-imagen-container">
             <img
-              src={`https://localhost:7261${product.imageUrl}`}
+              src={`${API_BASE_URL}${product.imageUrl}`}
               alt={product.name}
               className="detalle-producto-imagen"
             />
@@ -156,7 +157,7 @@ export default function DetalleDeProducto() {
                 >
                   <img
                     className="imagenes-relacionadas"
-                    src={`https://localhost:7261${relatedProduct.imageUrl}`}
+                    src={`${API_BASE_URL}${relatedProduct.imageUrl}`}
                     alt={relatedProduct.name}
                   />
                 </Link>

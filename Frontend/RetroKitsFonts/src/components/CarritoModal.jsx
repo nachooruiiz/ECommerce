@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../css/CarritoModal.css";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { API_BASE_URL } from "../config";
 
 
 const CarritoModal = ({ isOpen, onClose }) => {
@@ -32,7 +33,7 @@ const CarritoModal = ({ isOpen, onClose }) => {
             {carrito.map((item) => (
               <div key={`${item.productId}-${item.size}`} className="producto-modal">
                 <img
-                  src={`https://localhost:7261${item.imageUrl}`}
+                  src={`${API_BASE_URL}${item.imageUrl}`}
                   alt={item.name}
                   className="imagen-producto-modal"
                 />
@@ -41,11 +42,11 @@ const CarritoModal = ({ isOpen, onClose }) => {
                     <p>{item.name}</p>
                   </Link>
                   <p>Precio: {item.price}€</p>
-                  <p>Talla: {item.size}</p>
+                  {/* <p>Talla: {item.size}</p> */}
                   <div className="counter">
                     <button
                       onClick={() =>
-                        actualizarCantidad(item.productId, item.size, item.quantity - 1)
+                        actualizarCantidad(item.productId/*, item.size*/, item.quantity - 1)
                       }
                       disabled={item.quantity <= 1}
                     >
@@ -61,7 +62,7 @@ const CarritoModal = ({ isOpen, onClose }) => {
 
                     <button
                       onClick={() =>
-                        actualizarCantidad(item.productId, item.size, item.quantity + 1)
+                        actualizarCantidad(item.productId/*, item.size*/, item.quantity + 1)
                       }
                       disabled={item.quantity >= item.stock}
                     >
@@ -69,7 +70,7 @@ const CarritoModal = ({ isOpen, onClose }) => {
                     </button>
                   </div>
                   <button
-                    onClick={() => eliminarDelCarrito(item.productId, item.size)}
+                    onClick={() => eliminarDelCarrito(item.productId/*, item.size*/)}
                     className="eliminar-btn"
                   >
                     Eliminar

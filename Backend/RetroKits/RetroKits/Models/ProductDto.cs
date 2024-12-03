@@ -7,5 +7,5 @@ public class ProductDto
     public string? Description { get; set; }
     public string? ImageUrl { get; set; }
     public int? Stock { get; set;  }
-    public string ?Long_description { set; get; }
+    public string? Long_description { set; get; }
 }

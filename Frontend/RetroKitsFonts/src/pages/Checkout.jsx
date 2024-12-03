@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 import "../css/Checkout.css";
 import { Link } from "react-router-dom";
+import { API_BASE_URL, CREATE_ORDER } from "../config";
 
 const Checkout = () => {
   const { carrito, vaciarCarrito } = useContext(CartContext);
@@ -15,14 +16,6 @@ const Checkout = () => {
   const [mensaje, setMensaje] = useState("");
   const navigate = useNavigate();
   const { token } = useContext(TokenContext);
-
-  // Función para obtener una URL válida de la imagen
-  const obtenerImagenUrl = (imageUrl) => {
-    if (!imageUrl) return "https://via.placeholder.com/150"; // Imagen por defecto si no hay URL
-    return imageUrl.startsWith("http")
-      ? imageUrl
-      : `https://localhost:7261${imageUrl}`; // Cambia "localhost" por tu dominio real
-  };
 
   // Calcular subtotal
   const calcularSubtotal = () => {
@@ -56,7 +49,7 @@ const Checkout = () => {
     try {
       // Iterar sobre los productos del carrito y enviar cada uno como un pedido
       const promises = carrito.map(async (item) => {
-        const response = await fetch("https://localhost:7261/api/Order/AddOrder", {
+        const response = await fetch(CREATE_ORDER, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -132,7 +125,7 @@ const Checkout = () => {
                 {/* Enlace a los detalles del producto */}
                 <Link to={`/Catalogo/${item.productId}`} className="enlace-producto">
                   <img
-                    src={obtenerImagenUrl(item.imageUrl)}
+                    src={`${API_BASE_URL}${item.imageUrl}`}
                     className="imagen-producto-checkout"
                     alt={item.name || "Producto"}
                   />
