@@ -125,7 +125,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            
+
             var userId = int.Parse(User.FindFirstValue("id"));
 
             // Obtener el usuario desde la base de datos
@@ -137,18 +137,7 @@ public class UsersController : ControllerBase
                 return NotFound("No se encontró el usuario.");
             }
 
-            // Mapear a UserDto para enviar solo los datos necesarios
-            var userDto = new UserDto
-            {
-                Name = user.Name,
-                Email = user.Email, 
-                Addres = user.Address,
-                Password = user.Password,
-                Birthday = user.Birthday,
-                Orders = user.Orders,
-            };
-
-            return Ok(userDto);
+            return Ok(user);
         }
         catch (Exception ex)
         {

@@ -19,8 +19,8 @@ public class OrderController : Controller
     [HttpGet]
     public IActionResult GetOrder()
     {
-        
-       
+
+
         if (User.FindFirstValue("id") == null)
         {
             return BadRequest("No has hecho ningún pedido todavía");

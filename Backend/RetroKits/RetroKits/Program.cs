@@ -18,7 +18,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
+
         // Con esta línea se establece el wwwroot actual que tenemos
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
 
@@ -35,11 +35,13 @@ public class Program
         {
             builder.Services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder =>
+                options.AddPolicy("AllowSpecificOrigin", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    builder.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app",
+                                        "https://retro-kits.runasp.net",
+                                        "http://localhost:5173")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
                 });
             });
         }
@@ -71,9 +73,9 @@ public class Program
 
          });
 
-       
+
         var app = builder.Build();
-        
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
@@ -91,23 +93,13 @@ public class Program
         });
         app.UseRouting();
 
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
         {
-            app.UseSwagger(); 
+            app.UseSwagger();
             app.UseSwaggerUI();
-
-            app.UseCors(policy =>
-                policy.WithOrigins("http://localhost:5173")
-                      .AllowAnyHeader()
-                      .AllowAnyMethod());
+                
         }
-        else
-        {
-            app.UseCors(policy =>
-                policy.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app", "https://retro-kits.runasp.net")
-                      .AllowAnyHeader()
-                      .AllowAnyMethod());
-        }
+        app.UseCors("AllowSpecificOrigin");
 
 
         // Habilita la autenticaci�n

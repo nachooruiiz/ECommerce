@@ -9,5 +9,5 @@ public class UserDto
     public string Addres { get; set; }
     public string Password { get; set; }
     public string? Birthday { get; set; }
-    public ICollection<Order> Orders { get; set; }
+    public ICollection<OrderItemDto> Orders { get; set; }
 }

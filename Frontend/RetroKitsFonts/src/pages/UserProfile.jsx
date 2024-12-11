@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./../css/UserProfile.css";
-import { SHOW_CURRENT_USER, CHANGE_USER_INFO, GET_USER_ORDERS } from "../config";
+import UserOrders from "../components/UserOrders";
+import { SHOW_CURRENT_USER, CHANGE_USER_INFO } from "../config";
 import { TokenContext } from "../context/TokenContext";
 
 export default function UserProfile() {
@@ -13,7 +14,6 @@ export default function UserProfile() {
         password: "",
         birthday: "",
       });
-    const [orders, setOrders] = useState(null)
     const { token } = useContext(TokenContext)
     const { logOut } = useContext(TokenContext);
 
@@ -44,28 +44,6 @@ export default function UserProfile() {
         fetchUser();
 
     }, []);
-
-    const fetchOrders = async () => {
-        try {
-            const response = await fetch(GET_USER_ORDERS, {
-                method: "GET",
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-            })
-
-            if (response.ok){
-                const getOrders = await response.json()
-                setOrders(getOrders)
-                console.log(getOrders)
-            }else{
-                console.error("no se pudo obtener los pedidos del usuario")
-            }
-        }catch{
-            console.log("error")
-        }
-    }
 
     // Función para actualizar los datos del usuario
     const handleUpdateUser = async () => {
@@ -153,7 +131,7 @@ export default function UserProfile() {
                             <div className="editable">
                                 <input
                                     type="text"
-                                    value={newUserData.addres || ""}
+                                    value={newUserData.address || ""}
                                     onChange={(e) => setNewUserData({ ...newUserData, addres: e.target.value })}
                                 />
                             </div>
@@ -188,12 +166,7 @@ export default function UserProfile() {
                             </div>
                         </div>
 
-                        <div>
-                            <strong>Pedidos:</strong>
-                            <div>
-                                {user.orders || "No se han realizado pedidos todavía"}
-                            </div>
-                        </div>
+                        <UserOrders />
                     </div>
                 </div>
 
