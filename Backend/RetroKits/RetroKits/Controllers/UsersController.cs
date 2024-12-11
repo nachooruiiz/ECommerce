@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RetroKits.Database;
 using RetroKits.Models;
 using RetroKits.Repository;
+using System.Net;
 using System.Security.Claims;
 
 namespace RetroKits.Controllers;
@@ -27,11 +28,57 @@ public class UsersController : ControllerBase
         return await _userRepository.GetAllAsync();
     }
 
-    [HttpPut("UpdateUser/{userId}")]
-    public IActionResult UpdateUser([FromRoute] int userId, [FromBody] UserDto changes)
+    [HttpPut("UpdateData")]
+    public IActionResult UpdateUser([FromBody] UserDto changes)
     {
 
-        var userRole = User.FindFirstValue("role");
+        var userId = int.Parse(User.FindFirstValue("id"));
+        if (userId == 0)
+        {
+            return BadRequest("Para poder modificar un usuario tienes que ser administrador");
+        }
+
+        var existingUser = _dbContext.Users.SingleOrDefault(o => o.Id == userId);        
+
+        if (existingUser == null)
+        {
+            return NotFound("No se encontró el usuario.");
+        }
+
+        if (!string.IsNullOrEmpty(changes.Email))
+        {
+            existingUser.Email = changes.Email;
+        }
+        if (!string.IsNullOrEmpty(changes.Addres))
+        {
+            existingUser.Address = changes.Addres;
+        }
+        if (!string.IsNullOrEmpty(changes.Name))
+        {
+            existingUser.Name = changes.Name;
+        }
+        if (!string.IsNullOrEmpty(changes.Password))
+        {
+            existingUser.Password = changes.Password;
+        }
+        if (!string.IsNullOrEmpty(changes.Birthday))
+        {
+            existingUser.Birthday = changes.Birthday;
+        }
+
+
+        _dbContext.SaveChanges();
+
+        return Ok("Usuario actualizado correctamente.");
+    }
+
+
+
+    [HttpPut("ChangeRole/{userId}")]
+    public IActionResult ChangeRole([FromRoute] int userId, [FromBody] AdminDto changes)
+    {
+
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
         if (userRole != "Admin") 
         {
             return BadRequest("Para poder modificar un usuario tienes que ser administrador");
@@ -44,17 +91,9 @@ public class UsersController : ControllerBase
             return NotFound("No se encontró el usuario.");
         }
 
-        if (!string.IsNullOrEmpty(changes.Name)) 
+        if (!string.IsNullOrEmpty(changes.Rol))
         {
-            existingUser.Name = changes.Name;
-        }
-        if (!string.IsNullOrEmpty(changes.Addres))
-        {
-            //existingUser = changes.Addres;
-        }
-        if (!string.IsNullOrEmpty(changes.Email))
-        {
-            existingUser.Email = changes.Email;
+            existingUser.Role = changes.Rol;
         }
 
         _dbContext.SaveChanges();
@@ -65,7 +104,7 @@ public class UsersController : ControllerBase
     [HttpDelete("DeleteUser")]
     public IActionResult DeleteUser()
     {
-        var userRole = User.FindFirstValue("role");
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
         if (userRole != "Admin")
         {
             return BadRequest("Para poder modificar un usuario tienes que ser administrador");
@@ -80,4 +119,43 @@ public class UsersController : ControllerBase
 
         return Ok("Usuario eliminado exitosamente.");
     }
+
+    [HttpGet("GetCurrentUser")]
+    public async Task<ActionResult<UserDto>> GetCurrentUserAsync()
+    {
+        try
+        {
+            
+            var userId = int.Parse(User.FindFirstValue("id"));
+
+            // Obtener el usuario desde la base de datos
+            var user = await _dbContext.Users
+                .SingleOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("No se encontró el usuario.");
+            }
+
+            // Mapear a UserDto para enviar solo los datos necesarios
+            var userDto = new UserDto
+            {
+                Name = user.Name,
+                Email = user.Email, 
+                Addres = user.Address,
+                Password = user.Password,
+                Birthday = user.Birthday,
+                Orders = user.Orders,
+            };
+
+            return Ok(userDto);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, $"Error interno del servidor: {ex.Message}");
+        }
+    }
+
+
+
 }

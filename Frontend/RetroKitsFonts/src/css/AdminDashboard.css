@@ -1,0 +1,309 @@
+.admin-dashboard h1{
+  text-align: center;
+}
+
+/* Estilos generales para la página de administración de usuarios */
+.admin-users {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  /* Título */
+  .admin-users h2 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para el formulario de edición */
+  .edit-user-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  
+  .edit-user-form h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .edit-user-form input,
+  .edit-user-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .edit-user-form input:focus,
+  .edit-user-form select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Botones del formulario de edición */
+  .edit-user-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-user-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Tabla de usuarios */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #a32b2b;
+    color: white;
+    font-size: 1.1em;
+  }
+  
+  table td {
+    font-size: 1em;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Botones de acciones */
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  button:active {
+    background-color: #1e7e34;
+  }
+  
+  button + button {
+    background-color: #dc3545;
+  }
+  
+  button + button:hover {
+    background-color: #c82333;
+  }
+
+  /* Estilos generales para la página de administración de productos */
+.admin-products {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  /* Título */
+  .admin-products h2 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario de añadir producto */
+  .add-product-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  
+  .add-product-form h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .add-product-form input,
+  .add-product-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .add-product-form input:focus,
+  .add-product-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Botones del formulario de añadir producto */
+  .add-product-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-product-form button:hover {
+    background-color: #a32b2b;
+  }
+  
+  /* Formulario de edición de producto */
+  .edit-product-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  
+  .edit-product-form h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Estilos para los campos de entrada del formulario de edición */
+  .edit-product-form input,
+  .edit-product-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  .edit-product-form input:focus,
+  .edit-product-form textarea:focus {
+    border-color: #a32b2b;
+    outline: none;
+  }
+  
+  /* Botones del formulario de edición */
+  .edit-product-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-product-form button:hover {
+    background-color: #218838;
+  }
+  
+  .edit-product-form button:last-child {
+    background-color: #dc3545;
+  }
+  
+  .edit-product-form button:last-child:hover {
+    background-color: #c82333;
+  }
+  
+  /* Tabla de productos */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #a32b2b;
+    color: white;
+    font-size: 1.1em;
+  }
+  
+  table td {
+    font-size: 1em;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Botones de acciones en la tabla */
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  button:active {
+    background-color: #1e7e34;
+  }
+  
+  button + button {
+    background-color: #dc3545;
+  }
+  
+  button + button:hover {
+    background-color: #c82333;
+  }
+  
+  

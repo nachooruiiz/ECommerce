@@ -1,7 +1,7 @@
 // CartContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { TokenContext } from './TokenContext';
-import { ADD_ITEM_CART, REMOVE_ITEM_CART, SHOW_CART, UPDATE_ITEM_CART } from '../config';
+import { ADD_ITEM_CART, CLEAR_CART, REMOVE_ITEM_CART, SHOW_CART, UPDATE_ITEM_CART } from '../config';
 
 export const CartContext = createContext();
 
@@ -171,7 +171,7 @@ export const CartProvider = ({ children }) => {
   // Función para vaciar el carrito
   const vaciarCarrito = async () => {
     // Actualizar en el backend si es necesario
-    if (token) {
+    if (token != null) {
       try {
         const response = await fetch(CLEAR_CART, {
           method: 'DELETE',
@@ -179,7 +179,7 @@ export const CartProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        
         if (!response.ok) {
           const data = await response.json();
           setMensaje(data.message || 'Error al vaciar el carrito.');

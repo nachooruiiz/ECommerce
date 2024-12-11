@@ -24,6 +24,26 @@ const CLEAR_CART = `${API_BASE_URL}/api/Cart/ClearCart`
 
 const CREATE_ORDER = `${API_BASE_URL}/api/Order/AddOrder`
 
+const SHOW_USER_PROFILE = `${API_BASE_URL}/api/Users` 
+
+const CHANGE_USER_INFO = `${API_BASE_URL}/api/Users/UpdateData`
+
+const CHANGE_USER_ROL = `${API_BASE_URL}/api/Users/ChangeRole/`
+
+const DELETE_USER = `${API_BASE_URL}/api/Users/DeleteUser`
+
+const CREATE_PRODUCT = `${API_BASE_URL}/api/Product/registroproduct`
+
+const UPDATE_PRODUCT = `${API_BASE_URL}/api/Product/UpdateProduct/`
+
+const SHOW_CURRENT_USER = `${API_BASE_URL}/api/Users/GetCurrentUser`;
+
+const UPDATE_USER_INFO = `${API_BASE_URL}/api/Users/UpdateUser`;  
+
+const CHANGE_ROLE = `${API_BASE_URL}/api/Users/ChangeRole/`;
+
+const GET_USER_ORDERS = `${API_BASE_URL}/api/Order`
+
 export {
     SHOW_ALL_PRODUCTS, 
     SEARCH_PRODUCTS, 
@@ -36,5 +56,15 @@ export {
     REMOVE_ITEM_CART,
     CLEAR_CART,
     CREATE_ORDER,
-    REGISTER
+    REGISTER,
+    SHOW_USER_PROFILE,
+    CHANGE_USER_INFO,
+    CHANGE_USER_ROL,
+    DELETE_USER,
+    CREATE_PRODUCT,
+    UPDATE_PRODUCT,
+    SHOW_CURRENT_USER,
+    UPDATE_USER_INFO,
+    CHANGE_ROLE,
+    GET_USER_ORDERS
 }

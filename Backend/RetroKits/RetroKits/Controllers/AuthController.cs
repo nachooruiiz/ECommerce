@@ -44,7 +44,8 @@ public class AuthController : ControllerBase
             Name = data.Name,
             Email = data.Email,
             Password = data.Password,
-            Rol = "user" // Rol por defecto para nuevos usuarios
+            Address = data.Address,
+            Role = "user" // Rol por defecto para nuevos usuarios
         };
 
         _dbContext.Users.Add(newUser);
@@ -58,7 +59,7 @@ public class AuthController : ControllerBase
             {
                 {"id", newUser.Id },
                 {ClaimTypes.Name, newUser.Name },
-                {ClaimTypes.Role, newUser.Rol }
+                {ClaimTypes.Role, newUser.Role }
             },
             Expires = DateTime.UtcNow.AddDays(5),
             SigningCredentials = new SigningCredentials(
@@ -98,7 +99,7 @@ public class AuthController : ControllerBase
                 {"id", existingUser.Id },
                 {ClaimTypes.Name, existingUser.Name },
                 {ClaimTypes.Email, existingUser.Email },
-                {ClaimTypes.Role, existingUser.Rol }
+                {ClaimTypes.Role, existingUser.Role }
             },
             Expires = DateTime.UtcNow.AddDays(5),
             SigningCredentials = new SigningCredentials(

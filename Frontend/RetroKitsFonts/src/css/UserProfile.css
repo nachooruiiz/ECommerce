@@ -1,0 +1,148 @@
+/* Contenedor principal que envuelve todo el contenido */
+.user-profile-wrapper {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  padding: 2rem;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+}
+
+/* Contenedor principal de la información del perfil */
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; /* Espaciado entre las secciones */
+}
+
+/* Contenedor de la cabecera del usuario (imagen y datos) */
+.user-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Contenedor de la imagen */
+.user-image-container {
+  width: 35%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem; /* Mayor espacio debajo de la imagen */
+}
+
+.user-avatar {
+  width: 120px; /* Hacemos la imagen un poco más grande */
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra alrededor de la imagen para darle profundidad */
+}
+
+/* Contenedor de la información del usuario */
+.user-info-container {
+  width: 65%;
+  height: 50%;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1.5rem; /* Espacio entre cada campo de información */
+}
+
+.user-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem; /* Espacio debajo del nombre */
+}
+
+.user-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem; /* Más espacio entre los campos de información */
+  font-size: 1.1rem;
+}
+
+.user-field strong {
+  flex: 1;
+  text-align: left;
+}
+
+.user-field .editable {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editable .edit-button {
+  background: none;
+  border: none;
+  color: #a32b2b;
+  font-size: 1.2rem; /* Tamaño de fuente más grande para el botón */
+  cursor: pointer;
+}
+
+.editable .edit-button:hover {
+  color: #e0a800;
+}
+
+/* Botones de Zona Usuario */
+.user-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  gap: 1rem; /* Espacio entre los botones */
+}
+
+.user-action-button {
+  padding: 0.7rem 1.5rem; /* Botones más grandes */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #a32b2b;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 1rem 0; /* Añadimos un margen vertical para los botones */
+}
+
+.user-action-button:hover {
+  background-color: #e0a800;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .user-header {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .user-image-container {
+      width: 50%;
+      height: auto;
+      margin-bottom: 2rem;
+  }
+
+  .user-info-container {
+      width: 100%;
+      padding-left: 0;
+      gap: 2rem; /* Más espacio entre los campos en pantallas pequeñas */
+  }
+
+  .user-actions {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+  }
+}

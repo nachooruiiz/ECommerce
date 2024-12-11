@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import './../css/Carrito.css';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { TokenContext } from '../context/TokenContext';
 import { API_BASE_URL } from '../config';
-
 
 const Carrito = () => {
   const {
@@ -11,9 +11,10 @@ const Carrito = () => {
     actualizarCantidad,
     eliminarDelCarrito,
     vaciarCarrito,
-    mensaje,
-    setMensaje,
   } = useContext(CartContext);
+
+  const { token } = useContext(TokenContext);
+  const navigate = useNavigate();
 
   const calcularTotalProductos = () => {
     return carrito.reduce((total, item) => total + (parseInt(item.quantity) || 0), 0);
@@ -25,6 +26,15 @@ const Carrito = () => {
       const quantity = parseInt(item.quantity) || 0;
       return total + price * quantity;
     }, 0);
+  };
+
+  const handleTramitarPedido = () => {
+    if (token) {
+      navigate('/Checkout');
+    } else {
+      alert('Debes iniciar sesión para tramitar tu pedido.');
+      navigate('/login');
+    }
   };
 
   return (
@@ -41,26 +51,11 @@ const Carrito = () => {
               />
 
               <div>
-                <Link
-                  to={`/Catalogo/${item.productId}`}
-                  className="descripcion-pedido"
-                >
-                  <p className="nombre-producto">
-                    {item.name} - {item.price}€
-                  </p>
-                </Link>
-                <p>
-                  {/*Talla: {item.size} |*/} Cantidad: {item.quantity}
-                </p>
+                <p className="nombre-producto">{item.name} - {item.price}€</p>
+                <p>Cantidad: {item.quantity}</p>
                 <div className="counter">
                   <button
-                    onClick={() =>
-                      actualizarCantidad(
-                        item.productId,
-                        /*item.size,*/
-                        Math.max(item.quantity - 1, 1)
-                      )
-                    }
+                    onClick={() => actualizarCantidad(item.productId, Math.max(item.quantity - 1, 1))}
                     disabled={item.quantity <= 1}
                   >
                     -
@@ -75,20 +70,14 @@ const Carrito = () => {
                   />
 
                   <button
-                    onClick={() =>
-                      actualizarCantidad(
-                        item.productId,
-                        /*item.size,*/
-                        Math.min(item.quantity + 1, item.stock)
-                      )
-                    }
+                    onClick={() => actualizarCantidad(item.productId, Math.min(item.quantity + 1, item.stock))}
                     disabled={item.quantity >= item.stock}
                   >
                     +
                   </button>
                 </div>
                 <button
-                  onClick={() => eliminarDelCarrito(item.productId/*, item.size*/)}
+                  onClick={() => eliminarDelCarrito(item.productId)}
                   className="eliminar-btn"
                 >
                   Eliminar
@@ -103,9 +92,9 @@ const Carrito = () => {
       <div className="tramitar-pedido">
         <h2>Subtotal ({calcularTotalProductos()} productos)</h2>
         <p>{calcularSubtotal().toFixed(2)}€</p>
-        <Link to={'/Checkout'}>
-        <button className="ver-carrito-btn" >Tramitar Pedido</button>
-        </Link>
+        <button onClick={handleTramitarPedido} className="ver-carrito-btn">
+          Tramitar Pedido
+        </button>
         <button onClick={vaciarCarrito} className="eliminar-btn">
           Vaciar Carrito
         </button>

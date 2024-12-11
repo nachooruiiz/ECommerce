@@ -67,7 +67,7 @@ export default function LoginForm() {
 
         }else{
           console.log("carrito sincronizado")
-          //cart.cargarCarrito()
+          cart.cargarCarrito()
           console.log("Carrito cogido del back");
           localStorage.removeItem('localCart'); // Elimina el carrito local después de la sincronización
           setSucces(`Bienvenido ${email}`);

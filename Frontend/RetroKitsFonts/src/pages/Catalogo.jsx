@@ -14,17 +14,17 @@ export default function Catalogo() {
 
   // Llamada para obtener productos filtrados con paginación
   const fetchProducts = async (query, sortOption, page, pageSize) => {
+    console.log(SEARCH_PRODUCTS)
     try {
       const response = await fetch(`${SEARCH_PRODUCTS}?query=${query}&option=${sortOption}&page=${page}&pageSize=${pageSize}`);
       if (!response.ok) {
         throw new Error("Error al obtener productos");
       }
-
+      console.log(SEARCH_PRODUCTS)
       const data = await response.json();
 
       // Obtiene el total de págines desde la cabecera de response
       setTotalPages(parseInt(response.headers.get("X-Total-Count"), 10));
-      console.log(totalPages);
 
       setProducts(data);
     } catch (error) {

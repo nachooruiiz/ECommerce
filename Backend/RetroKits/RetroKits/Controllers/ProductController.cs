@@ -34,6 +34,7 @@ namespace RetroKits.Controllers
             // Mapeo de productos a ProductDto para enviar solo los campos necesarios al frontend
             var productDtos = products.Select(p => new ProductDto
             {
+                Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
                 Description = p.Description,
@@ -92,7 +93,7 @@ namespace RetroKits.Controllers
         [HttpPost("UpdateProduct/{Id}")]
         public ActionResult UpdateProduct([FromRoute] int Id, [FromBody] ProductDto data)
         {
-            var userRole = User.FindFirstValue("role");
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
             if (userRole != "Admin")
             {
                 return BadRequest("Para poder modificar un producto tienes que ser administrador");
@@ -131,5 +132,35 @@ namespace RetroKits.Controllers
 
             return Ok("Actualizando datos del producto...");
         }
+
+        // POST: api/product/AddProduct
+        [HttpPost("AddProduct")]
+        public ActionResult AddProduct([FromBody] ProductDto data)
+        {
+            // 1. Verificar si el producto ya existe
+            var existingProduct = _dbContext.Products.SingleOrDefault(u => u.Name == data.Name);
+
+            if (existingProduct != null)
+            {
+                return Conflict("El producto ya existe.");
+            }
+
+            // 2. Si el producto no existe, crearlo y añadirlo a la base de datos
+            var newProduct = new Product
+            {
+                Name = data.Name,
+                Price = data.Price,
+                Description = data.Description,
+                ImageUrl = data.ImageUrl,
+                Stock = (int)data.Stock,
+                Long_description = data.Long_description,
+            };
+
+            _dbContext.Products.Add(newProduct);
+            _dbContext.SaveChanges();
+
+            return Ok(newProduct); // Regresa el producto recién creado
+        }
+
     }
 }

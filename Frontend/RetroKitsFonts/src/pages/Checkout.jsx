@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../context/TokenContext";
 import "../css/Checkout.css";
 import { Link } from "react-router-dom";
-import { API_BASE_URL, CREATE_ORDER } from "../config";
+import { API_BASE_URL, CREATE_ORDER, SHOW_CURRENT_USER } from "../config";
 
 const Checkout = () => {
   const { carrito, vaciarCarrito } = useContext(CartContext);
@@ -18,6 +18,32 @@ const Checkout = () => {
   const { token } = useContext(TokenContext);
 
   // Calcular subtotal
+  console.log(formData)
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+          const response = await fetch(SHOW_CURRENT_USER, {
+              method: "GET",
+              headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  "Content-Type": "application/json",
+              },
+          });
+  
+          if (response.ok) {
+              const userData = await response.json();
+              setFormData(userData); // Inicializar los datos editables
+          } else {
+              console.error("Error al obtener los datos del usuario");
+          }
+      } catch (error) {
+          console.error("Error al conectar con el servidor:", error);
+      }
+    };
+    
+    fetchUser()
+  }, [])
+
   const calcularSubtotal = () => {
     return carrito
       .reduce((total, item) => {
@@ -42,7 +68,7 @@ const Checkout = () => {
     }
 
     if (!formData.nombre || !formData.direccion || !formData.telefono) {
-      alert("Por favor, completa todos los datos.");
+      alert("Por favor, completa todos los datos.", formData.nombre, formData.direccion, formData.telefono);
       return;
     }
 
@@ -90,7 +116,7 @@ const Checkout = () => {
             <input
               type="text"
               name="nombre"
-              value={formData.nombre}
+              value={formData.name}
               onChange={handleInputChange}
             />
           </label>
@@ -99,7 +125,7 @@ const Checkout = () => {
             <input
               type="text"
               name="direccion"
-              value={formData.direccion}
+              value={formData.addres}
               onChange={handleInputChange}
             />
           </label>
@@ -108,7 +134,7 @@ const Checkout = () => {
             <input
               type="text"
               name="telefono"
-              value={formData.telefono}
+              value={formData.phone}
               onChange={handleInputChange}
             />
           </label>

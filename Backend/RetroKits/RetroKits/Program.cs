@@ -58,7 +58,7 @@ public class Program
         builder.Services.AddAuthentication()
          .AddJwtBearer(options =>
          {
-             string key = "nduncsdicunseu37846%$�(�/&(T/�gb87";
+             string key = Environment.GetEnvironmentVariable("JWT_KEY");
 
 
              options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
