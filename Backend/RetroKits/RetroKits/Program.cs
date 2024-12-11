@@ -97,7 +97,14 @@ public class Program
             app.UseSwaggerUI();
 
             app.UseCors(policy =>
-                policy.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app", "https://retro-kits.runasp.net", "http://localhost:5173")
+                policy.WithOrigins("http://localhost:5173")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod());
+        }
+        else
+        {
+            app.UseCors(policy =>
+                policy.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app", "https://retro-kits.runasp.net")
                       .AllowAnyHeader()
                       .AllowAnyMethod());
         }
