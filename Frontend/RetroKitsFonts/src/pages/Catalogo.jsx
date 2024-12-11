@@ -14,6 +14,7 @@ export default function Catalogo() {
 
   // Llamada para obtener productos filtrados con paginación
   const fetchProducts = async (query, sortOption, page, pageSize) => {
+    console.log(API_BASE_URL)
     console.log(SEARCH_PRODUCTS)
     try {
       const response = await fetch(`${SEARCH_PRODUCTS}?query=${query}&option=${sortOption}&page=${page}&pageSize=${pageSize}`);
