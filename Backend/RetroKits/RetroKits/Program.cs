@@ -35,13 +35,9 @@ public class Program
         {
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin", builder =>
+                options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app",
-                                        "https://retro-kits.runasp.net",
-                                        "http://localhost:5173")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
         }
@@ -99,7 +95,7 @@ public class Program
             app.UseSwaggerUI();
                 
         }
-        app.UseCors("AllowSpecificOrigin");
+        app.UseCors();
 
 
         // Habilita la autenticaci�n

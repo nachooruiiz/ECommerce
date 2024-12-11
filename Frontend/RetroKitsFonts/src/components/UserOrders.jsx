@@ -19,7 +19,7 @@ const UserOrders = () => {
 
                 if (response.ok){
                     const getOrders = await response.json()
-                    setOrders(getOrders.order)
+                    setOrders(getOrders.orders)
                     console.log("esto es el getorder",getOrders)
                 }else{
                     console.error("no se pudo obtener los pedidos del usuario")
@@ -33,7 +33,7 @@ const UserOrders = () => {
     }, [])
 
     useEffect(() => {
-        console.log("Pedidos actualizados:", orders); // Se ejecuta cuando 'orders' cambia
+        console.log("Esto es el order noraml:", orders);
       }, [orders]); 
     
   return (
