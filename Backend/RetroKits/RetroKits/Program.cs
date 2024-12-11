@@ -97,7 +97,7 @@ public class Program
             app.UseSwaggerUI();
 
             app.UseCors(policy =>
-                policy.WithOrigins("https://prueba-6vn1i59ax-nachos-projects-4efa55bc.vercel.app", "https://retro-kits.runasp.net")
+                policy.WithOrigins("https://prueba-a4azsoatg-nachos-projects-4efa55bc.vercel.app", "https://retro-kits.runasp.net", "http://localhost:5173")
                       .AllowAnyHeader()
                       .AllowAnyMethod());
         }
