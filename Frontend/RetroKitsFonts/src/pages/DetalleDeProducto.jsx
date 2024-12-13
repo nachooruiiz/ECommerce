@@ -10,10 +10,7 @@ export default function DetalleDeProducto() {
   const [product, setProduct] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
-  const { agregarAlCarrito } = useContext(CartContext); // Accede a la función para agregar al carrito desde el contexto
-
-  // Estado para productos relacionados (opcional)
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  const { agregarAlCarrito } = useContext(CartContext);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -27,13 +24,6 @@ export default function DetalleDeProducto() {
         const data = await response.json();
         setProduct(data);
 
-        // Si deseas obtener productos relacionados
-        const relatedUrl = `https://localhost:7261/api/Product/relatedProducts?id_product=${id}`;
-        const relatedResponse = await fetch(relatedUrl);
-        if (relatedResponse.ok) {
-          const relatedData = await relatedResponse.json();
-          setRelatedProducts(relatedData);
-        }
       } catch (error) {
         setError(error.message);
       }
